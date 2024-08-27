@@ -10,9 +10,7 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPa
 const LoginForm = () => {
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
-    const [userName, setUserName] = useState("");
     const [error, setError] = useState({ input: "", password: "" });
-    const [verificationId, setVerificationId] = useState('');
 
     const router = useRouter();
 
@@ -67,6 +65,7 @@ const LoginForm = () => {
           headers: { "Content-Type": "application/json", Accept: "application/json" },
         }).then((res) => {
           if (!res.ok) throw new Error("Failed to send message");
+          router.push('/send-code');
           return res.json();
         });
 
@@ -74,26 +73,12 @@ const LoginForm = () => {
             return Math.floor(100000 + Math.random() * 900000);
         };
         
-        // function onCaptchVerify() {
-        //     if (!window.recaptchaVerifier) {
-        //       window.recaptchaVerifier = new RecaptchaVerifier(
-        //         "recaptcha-container",
-        //         {
-        //           size: "normal",
-        //           callback: (response) => {},
-        //           "expired-callback": () => {},
-        //         },
-        //         auth
-        //       );
-        //     }
-        //   }
 
     const handleSubmit = async () => {
 
         const inputType = validateInput();
         const isPasswordValid = validatePassword();
 
-        // Validate input and password
         if (!inputType) {
             setError((prev) => ({ ...prev, input: "Please enter a valid email or phone number." }));
             return;
@@ -113,60 +98,31 @@ const LoginForm = () => {
                 let otp = generateOtp()
                 localStorage.setItem('verificationOtp',otp)
                 sendContactForm(input,otp)
-                router.push('/send-code');
+                // router.push('/send-code');
            
             } else if (user.phone === input) {
-                // Sign in with phone number
+                let otp = generateOtp()
+                localStorage.setItem('verificationOtp',otp)
+                sendContactForm(user.email,otp)
+           
+                // try {
 
-                try {
-
-                    const confirmationResult = await signInWithPhoneNumber(auth, `+91${input.replace(/\D/g,'')}`,window.recaptchaVerifier);
-                    localStorage.setItem('verificationId', confirmationResult.verificationId);
-                    router.push('/send-code');
-                    toast.success("OTP sent to your phone");
-                } catch (error) {
-                    if (error.code === 'auth/too-many-requests') {
-                        toast.error("Too many requests. Please try again later.");
-                    } else {
-                        console.error("Error sending OTP:", error);
-                    }
-                }
+                //     const confirmationResult = await signInWithPhoneNumber(auth, `+91${input.replace(/\D/g,'')}`,window.recaptchaVerifier);
+                //     localStorage.setItem('verificationId', confirmationResult.verificationId);
+                //     router.push('/send-code');
+                //     toast.success("OTP sent to your phone");
+                // } catch (error) {
+                //     if (error.code === 'auth/too-many-requests') {
+                //         toast.error("Too many requests. Please try again later.");
+                //     } else {
+                //         console.error("Error sending OTP:", error);
+                //     }
+                // }
             }
         } else {
             toast.error("No user found with that email or phone number.");
         }
     };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     const inputType = validateInput();
-    //     const isPasswordValid = validatePassword();
-
-    //     // Validate input and password
-    //     if (!inputType) {
-    //         setError((prev) => ({ ...prev, input: "Please enter a valid email or phone number." }));
-    //         return;
-    //     }
-
-    //     if (!isPasswordValid) {
-    //         setError((prev) => ({ ...prev, password: "Password must be at least 6 characters." }));
-    //         return;
-    //     }
-
-    //     // Find user based on email or phone
-    //     const user = users.find(user =>
-    //         (user.email == input || user.phone == input)
-    //     );
-    //     console.log(user, 'user')
-    //     if (user) {
-    //         // Redirect to the /send-code page
-    //         router.push('/send-code');
-    //         return;
-    //     } else {
-    //         toast.error("No user found with that email or phone number.");
-    //     }
-    // };
 
     return (
         <section className="bg-gray-50">
@@ -178,21 +134,6 @@ const LoginForm = () => {
                             Login to your account
                         </h1>
                         <form className="space-y-4 md:space-y-6" >
-                            <div>
-                                <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
-                                    Name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="emailOrPhone"
-                                    id="emailOrPhone"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                    placeholder="Enter your name"
-                                    value={userName}
-                                    onChange={(e) => setUserName(e.target.value)}
-                                    required
-                                />
-                            </div>
                             <div>
                                 <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
                                     Email or Mobile Number
