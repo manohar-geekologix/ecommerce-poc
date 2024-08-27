@@ -79,7 +79,7 @@ const SendCode = () => {
                                     />
                                 ))}
                             </div>
-                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600">Verify Code</button>
+                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800">Verify Code</button>
                             <p className="text-sm font-light text-gray-500">
                                 Didn't receive the code? <a href="#" className="font-medium text-primary-600 hover:underline text-blue-600">Resend</a>
                             </p>

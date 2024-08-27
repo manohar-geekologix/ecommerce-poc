@@ -71,7 +71,6 @@ const LoginForm = () => {
         return Math.floor(100000 + Math.random() * 900000);
     };
 
-
     const handleSubmit = async () => {
 
         const inputType = validateInput();
@@ -165,7 +164,7 @@ const LoginForm = () => {
                                 id="sign-in-button"
                                 onClick={handleSubmit}
                                 type="button"
-                                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600"
+                                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800 disabled:bg-gray-600"
                             >
                                 Login
                             </button>
