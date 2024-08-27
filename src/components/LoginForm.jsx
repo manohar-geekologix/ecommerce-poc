@@ -1,10 +1,14 @@
 'use client'
+import { users } from "@/utils/MockData";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState({ input: "", password: "" });
+    const router = useRouter();
 
     const handleInputChange = (e) => {
         setInput(e.target.value);
@@ -31,37 +35,38 @@ const LoginForm = () => {
     };
 
     const validatePassword = () => {
-        // Password must be at least 8 characters long and contain at least one letter, one number, and one special character
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-
-        if (passwordRegex.test(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        // Password must be at least 6 characters long
+        return password.length >= 6;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const inputType = validateInput();
         const isPasswordValid = validatePassword();
 
+        // Validate input and password
         if (!inputType) {
             setError((prev) => ({ ...prev, input: "Please enter a valid email or phone number." }));
+            return;
         }
 
         if (!isPasswordValid) {
-            setError((prev) => ({ ...prev, password: "Password must be at least 8 characters long and include one letter, one number, and one special character." }));
+            setError((prev) => ({ ...prev, password: "Password must be at least 6 characters." }));
+            return;
         }
 
-        if (inputType && isPasswordValid) {
-            // Handle the form submission based on the input type
-            if (inputType === "email") {
-                console.log("Email submitted:", input);
-            } else if (inputType === "phone") {
-                console.log("Phone number submitted:", input);
-            }
-            console.log("Password submitted:", password);
+        // Find user based on email or phone
+        const user = users.find(user =>
+            (user.email == input || user.phone == input)
+        );
+        console.log(user, 'user')
+        if (user) {
+            // Redirect to the /send-code page
+            router.push('/send-code');
+            return;
+        } else {
+            toast.error("No user found with that email or phone number.");
         }
     };
 
@@ -75,7 +80,9 @@ const LoginForm = () => {
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">Email or Mobile Number</label>
+                                <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
+                                    Email or Mobile Number
+                                </label>
                                 <input
                                     type="text"
                                     name="emailOrPhone"
