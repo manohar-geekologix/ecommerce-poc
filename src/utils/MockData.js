@@ -16,6 +16,6 @@ export const users = [
     name: 'Test Two',
     email: 'test2@mailinator.com',
     password: '123456',
-    phone: '9680905583',
+    phone: '9680905582',
   }
 ];

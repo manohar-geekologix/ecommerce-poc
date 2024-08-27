@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "crypto-js": "^4.1.1",
-    "firebase": "^10.13.0",
+    "firebase": "^9.15.0",
     "next": "14.2.6",
+    "nodemailer": "^6.9.9",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^8",
