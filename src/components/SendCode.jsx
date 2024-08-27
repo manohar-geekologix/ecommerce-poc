@@ -1,9 +1,8 @@
 "use client"
-
-import React, { useState } from 'react';
-import  { auth } from "@/app/firebase";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signInWithCredential, PhoneAuthProvider } from "firebase/auth";
+import { auth } from "@/app/firebase";
+import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const SendCode = () => {
@@ -27,9 +26,9 @@ const SendCode = () => {
         e.preventDefault();
         const verificationId = localStorage.getItem('verificationId');
         if (verificationId) {
-            
+
             const otpString = otp.join(''); // Combine array into a string
-    
+
             try {
                 const credential = PhoneAuthProvider.credential(verificationId, otpString);
                 await signInWithCredential(auth, credential);
@@ -39,7 +38,7 @@ const SendCode = () => {
             } catch (error) {
                 toast.error("Envalid OTP ");
             }
-        }else{
+        } else {
             const verification = localStorage.getItem('verificationOtp');
             const otpString = otp.join(''); // Combine array into a 
             if (otpString == verification) {
@@ -47,13 +46,11 @@ const SendCode = () => {
 
                 router.push('/');
                 toast.success("OTP verified successfully!");
-            }else{
+            } else {
                 toast.error("Envalid OTP ");
             }
         }
     };
-
-      
 
     return (
         <section className="bg-gray-50">
@@ -82,7 +79,7 @@ const SendCode = () => {
                                     />
                                 ))}
                             </div>
-                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600">Verify Code</button>
+                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800">Verify Code</button>
                             <p className="text-sm font-light text-gray-500">
                                 Didn't receive the code? <a href="#" className="font-medium text-primary-600 hover:underline text-blue-600">Resend</a>
                             </p>

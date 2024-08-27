@@ -1,9 +1,7 @@
-import MainMenu from "@/components/MainMenu";
+import ProductList from "@/components/product/ProductList";
 
 export default function Home() {
   return (
-    <>
-      <MainMenu />
-    </>
+    <ProductList />
   );
 }
