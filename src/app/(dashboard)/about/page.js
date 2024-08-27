@@ -1,4 +1,3 @@
-
 export default function about() {
     return (
         <div className='p-6'>

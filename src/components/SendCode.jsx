@@ -1,9 +1,8 @@
 "use client"
-
-import React, { useState } from 'react';
-import  { auth } from "@/app/firebase";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signInWithCredential, PhoneAuthProvider } from "firebase/auth";
+import { auth } from "@/app/firebase";
+import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const SendCode = () => {
@@ -27,9 +26,9 @@ const SendCode = () => {
         e.preventDefault();
         const verificationId = localStorage.getItem('verificationId');
         if (verificationId) {
-            
+
             const otpString = otp.join(''); // Combine array into a string
-    
+
             try {
                 const credential = PhoneAuthProvider.credential(verificationId, otpString);
                 await signInWithCredential(auth, credential);
@@ -39,7 +38,7 @@ const SendCode = () => {
             } catch (error) {
                 toast.error("Envalid OTP ");
             }
-        }else{
+        } else {
             const verification = localStorage.getItem('verificationOtp');
             const otpString = otp.join(''); // Combine array into a 
             if (otpString == verification) {
@@ -47,13 +46,11 @@ const SendCode = () => {
 
                 router.push('/');
                 toast.success("OTP verified successfully!");
-            }else{
+            } else {
                 toast.error("Envalid OTP ");
             }
         }
     };
-
-      
 
     return (
         <section className="bg-gray-50">
