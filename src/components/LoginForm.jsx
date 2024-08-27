@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 const LoginForm = () => {
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
+    const [userName, setUserName] = useState("");
     const [error, setError] = useState({ input: "", password: "" });
     const router = useRouter();
 
@@ -60,7 +61,7 @@ const LoginForm = () => {
         const user = users.find(user =>
             (user.email == input || user.phone == input)
         );
-        console.log(user, 'user')
+
         if (user) {
             // Redirect to the /send-code page
             router.push('/send-code');
@@ -79,6 +80,21 @@ const LoginForm = () => {
                             Login to your account
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                            <div>
+                                <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="emailOrPhone"
+                                    id="emailOrPhone"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                    placeholder="Enter your name"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
+                                    required
+                                />
+                            </div>
                             <div>
                                 <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
                                     Email or Mobile Number
