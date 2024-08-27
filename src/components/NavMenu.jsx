@@ -6,7 +6,7 @@ const NavMenu = () => {
         <header className="bg-gray-200 text-primary-foreground py-4 px-6">
             <nav className="flex items-center justify-between">
                 <Link href="#" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
-                    Flight Tracker
+                    Logo
                 </Link>
                 <div className='flex gap-5'>
                     <Link href={'/'} className='font-semibold'>Home</Link>
