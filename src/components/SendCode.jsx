@@ -28,7 +28,6 @@ const SendCode = () => {
         if (verificationId) {
 
             const otpString = otp.join(''); // Combine array into a string
-
             try {
                 const credential = PhoneAuthProvider.credential(verificationId, otpString);
                 await signInWithCredential(auth, credential);
@@ -43,7 +42,6 @@ const SendCode = () => {
             const otpString = otp.join(''); // Combine array into a 
             if (otpString == verification) {
                 localStorage.removeItem('verificationOtp');
-
                 router.push('/');
                 toast.success("OTP verified successfully!");
             } else {
