@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { MdOutlineVisibility, MdOutlineVisibilityOff, MdVisibility } from 'react-icons/md';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ input: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
   const router = useRouter();
 
   //   useEffect(() => {
@@ -103,7 +105,6 @@ const LoginForm = () => {
       // }
     }
   };
-
   return (
     <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center lg:px-10 px-4 flex-col lg:flex-row">
       <div className="lg:w-1/2 lg:block hidden">
@@ -116,19 +117,24 @@ const LoginForm = () => {
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <div className='lg:hidden block text-center'>
+        <div className="lg:hidden block text-center">
           <div className="flex flex-col gap-1">
             <h1 className=" text-[#CE5C1C] font-medium text-2xl">Welcome to</h1>
             <h3 className="text-[#213B85] font-bold text-[32px]">Demo Project</h3>
           </div>
         </div>
         <form className="bg-white px-5 py-3 lg:px-16 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[500px] mx-auto lg:absolute top-[-300px] left-14">
-          <Image width={100} height={100} alt="logo" src={'/images/Logo.svg'} className="mx-auto w-[180px] lg:w-[260px]" />
+          <Image
+            width={100}
+            height={100}
+            alt="logo"
+            src={'/images/Logo2.svg'}
+            className="mx-auto items-center size-auto"
+          />
           <div>
             <h3 className="text-[#CE5C1C] font-semibold text-[20px] lg:text-3xl">Login</h3>
             <p className="text-[#213B85] font-normal text-xs lg:text-sm">Welcome Back!</p>
           </div>
-
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="username" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Name<span className="text-[#CE5C1C]">*</span>
@@ -192,7 +198,7 @@ const LoginForm = () => {
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image width={100} height={100} alt="person" src={'/images/lock.svg'} className="size-auto" />
                 <input
-                  type="password"
+                  type={show ? 'text' : 'password'}
                   name="password"
                   id="password"
                   placeholder="Password"
@@ -201,7 +207,9 @@ const LoginForm = () => {
                   onChange={handleChange}
                   required
                 />
-                <Image width={100} height={100} alt="person" src={'/images/visibility_off.svg'} className="size-auto" />
+                <div onClick={() => setShow(!show)} className="cursor-pointer">
+                  {show ? <MdOutlineVisibility fontSize={22} /> : <MdOutlineVisibilityOff fontSize={22} />}
+                </div>
               </div>
               {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
             </label>
