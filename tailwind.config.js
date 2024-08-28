@@ -11,7 +11,7 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "login-bg": "url('/images/Login_Bg.png')",
+        "login-bg": "url('/images/Login_Screen.svg')",
       },
       boxShadow:{
         "login-shadow":" 0px 0px 10px 0px #0000001A",
