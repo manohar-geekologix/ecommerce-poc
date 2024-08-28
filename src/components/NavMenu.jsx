@@ -1,10 +1,17 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname,useRouter } from 'next/navigation'
+
 import React from 'react'
 
 const NavMenu = () => {
     const pathname = usePathname()
+    const router = useRouter()
+
+    const handleLogout = () =>{
+        localStorage.removeItem('accessToken')
+        router.push('/login')
+    }
 
     return (
         <header className="bg-gray-200 text-primary-foreground py-4 px-6">
@@ -17,7 +24,7 @@ const NavMenu = () => {
                     <Link href={'/about'} className={`${pathname == '/about' ? 'text-gray-500' : ''} font-semibold`}>About</Link>
                     <Link href={'/contact-us'} className={`${pathname == '/contact-us' ? 'text-gray-500' : ''} font-semibold`}>Contact Us</Link>
                 </div>
-                <Link href={'/login'} className='font-bold'>Logout</Link>
+                <a  onClick={handleLogout} className='font-bold cursor-pointer'>Logout</a>
             </nav>
         </header>
     )

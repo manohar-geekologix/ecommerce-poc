@@ -17,5 +17,11 @@ export const users = [
     email: 'test2@mailinator.com',
     password: '123456',
     phone: '1234567567',
+  },
+  {
+    name: 'Test Two',
+    email: 'manohar.geekologix@gmail.com',
+    password: '123456',
+    phone: '1234567567',
   }
 ];
