@@ -1,6 +1,7 @@
 'use client'
+import Cookies from 'js-cookie'
 import Link from 'next/link'
-import { usePathname,useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import React from 'react'
 
@@ -8,8 +9,8 @@ const NavMenu = () => {
     const pathname = usePathname()
     const router = useRouter()
 
-    const handleLogout = () =>{
-        localStorage.removeItem('accessToken')
+    const handleLogout = () => {
+        Cookies.remove('accessToken');
         router.push('/login')
     }
 
@@ -24,7 +25,7 @@ const NavMenu = () => {
                     <Link href={'/about'} className={`${pathname == '/about' ? 'text-gray-500' : ''} font-semibold`}>About</Link>
                     <Link href={'/contact-us'} className={`${pathname == '/contact-us' ? 'text-gray-500' : ''} font-semibold`}>Contact Us</Link>
                 </div>
-                <a  onClick={handleLogout} className='font-bold cursor-pointer'>Logout</a>
+                <a onClick={handleLogout} className='font-bold cursor-pointer'>Logout</a>
             </nav>
         </header>
     )

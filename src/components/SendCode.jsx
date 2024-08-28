@@ -1,12 +1,14 @@
 "use client"
 import { auth } from "@/app/firebase";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
+import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 
 const SendCode = () => {
     const [otp, setOtp] = useState(new Array(6).fill("")); // Array to hold 6 digits
+    const inputRefs = useRef([]); // Array of refs to handle input focus
     const router = useRouter();
 
     const handleChange = (element, index) => {
@@ -16,40 +18,56 @@ const SendCode = () => {
         newOtp[index] = element.value;
         setOtp(newOtp);
 
-        // Move focus to next input box if current is filled
-        if (element.nextSibling && element.value) {
-            element.nextSibling.focus();
+        // Move focus to the next input box if current is filled
+        if (element.value && index < 5) {
+            inputRefs.current[index + 1].focus();
         }
+    };
+
+    const handleKeyUp = (e, index) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            inputRefs.current[index - 1].focus();
+        }
+    };
+
+    const handlePaste = (e) => {
+        const pasteData = e.clipboardData.getData('text').slice(0, 6);
+        if (!/^\d+$/.test(pasteData)) return; // Ensure only digits are pasted
+        const newOtp = pasteData.split('');
+        setOtp(newOtp);
+
+        // Move focus to the last filled input
+        inputRefs.current[Math.min(newOtp.length - 1, 5)].focus();
     };
 
     function generateUniqueString() {
         const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        
+
         if (characters.length < 30) {
             throw new Error('Not enough unique characters to generate a 30-character string.');
         }
-        
+
         let uniqueString = '';
         const usedIndexes = new Set();
-    
+
         while (uniqueString.length < 30) {
             const randomIndex = Math.floor(Math.random() * characters.length);
-    
+
             if (!usedIndexes.has(randomIndex)) {
                 uniqueString += characters[randomIndex];
                 usedIndexes.add(randomIndex);
             }
         }
-    
+
         return uniqueString;
     }
 
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         const verificationId = localStorage.getItem('verificationId');
-        if (verificationId) {
+        const otpString = otp.join(''); // Combine array into a string
 
-            const otpString = otp.join(''); // Combine array into a string
+        if (verificationId) {
             try {
                 const credential = PhoneAuthProvider.credential(verificationId, otpString);
                 await signInWithCredential(auth, credential);
@@ -57,19 +75,18 @@ const SendCode = () => {
                 toast.success("OTP verified successfully!");
                 localStorage.removeItem('verificationId');
             } catch (error) {
-                toast.error("Invalid OTP ");
+                toast.error("Invalid OTP");
             }
         } else {
             const verification = localStorage.getItem('verificationOtp');
-            const otpString = otp.join(''); // Combine array into a 
-            if (otpString == verification) {
-                    let token = generateUniqueString();
-                    localStorage.setItem('accessToken',token)
+            if (otpString === verification) {
+                let token = generateUniqueString();
+                Cookies.set('accessToken', token, { expires: 7, path: '/' });
                 localStorage.removeItem('verificationOtp');
                 router.push('/');
                 toast.success("OTP verified successfully!");
             } else {
-                toast.error("Invalid OTP ");
+                toast.error("Invalid OTP");
             }
         }
     };
@@ -84,20 +101,17 @@ const SendCode = () => {
                             <p className="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to your phone.</p>
                         </header>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleVerifyOtp}>
-                            <div className="flex items-center justify-center gap-3">
+                            <div className="flex items-center justify-center gap-3" onPaste={handlePaste}>
                                 {otp.map((digit, index) => (
                                     <input
                                         key={index}
+                                        ref={(el) => (inputRefs.current[index] = el)}
                                         type="text"
                                         className="w-10 sm:w-14 h-10 sm:h-14 text-center text-2xl font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-indigo-100"
                                         maxLength="1"
                                         value={digit}
-                                        onChange={e => handleChange(e.target, index)}
-                                        onKeyUp={e => {
-                                            if (e.key === 'Backspace' && e.target.previousSibling) {
-                                                e.target.previousSibling.focus();
-                                            }
-                                        }}
+                                        onChange={(e) => handleChange(e.target, index)}
+                                        onKeyUp={(e) => handleKeyUp(e, index)}
                                     />
                                 ))}
                             </div>
