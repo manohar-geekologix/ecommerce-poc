@@ -105,50 +105,56 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="bg-gray-50 bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center px-10">
-      <div className="w-1/2">
-        <div className="flex flex-col gap-5">
-          <h1 className=" text-[#CE5C1C] font-medium text-5xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-6xl">Demo Project</h3>
+    <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center lg:px-10 px-4 flex-col lg:flex-row">
+      <div className="lg:w-1/2 lg:block hidden">
+        <div className="flex flex-col gap-1 lg:gap-5">
+          <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
+          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Demo Project</h3>
         </div>
-        <div className="">
+        <div className="lg:block hidden">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
         </div>
       </div>
-      <div className="w-1/2">
-        <form className="bg-white px-16 py-5 rounded-2xl shadow-login-shadow flex flex-col gap-4 w-[520px]">
-          <Image width={100} height={100} alt="logo" src={'/images/Logo.svg'} className="mx-auto w-[260px]" />
+      <div className="lg:w-1/2 w-full relative">
+        <div className='lg:hidden block text-center'>
+          <div className="flex flex-col gap-1">
+            <h1 className=" text-[#CE5C1C] font-medium text-2xl">Welcome to</h1>
+            <h3 className="text-[#213B85] font-bold text-[32px]">Demo Project</h3>
+          </div>
+        </div>
+        <form className="bg-white px-5 py-3 lg:px-16 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[500px] mx-auto lg:absolute top-[-300px] left-14">
+          <Image width={100} height={100} alt="logo" src={'/images/Logo.svg'} className="mx-auto w-[180px] lg:w-[260px]" />
           <div>
-            <h3 className="text-[#CE5C1C] font-semibold text-3xl">Login</h3>
-            <p className="text-[#213B85] font-normal text-sm">Welcome Back!</p>
+            <h3 className="text-[#CE5C1C] font-semibold text-[20px] lg:text-3xl">Login</h3>
+            <p className="text-[#213B85] font-normal text-xs lg:text-sm">Welcome Back!</p>
           </div>
 
           <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="username" className="text-[#1A1A1A] font-medium text-sm">
+            <label htmlFor="username" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Name<span className="text-[#CE5C1C]">*</span>
-              <div className="flex items-center gap-2 border rounded-lg px-2 py-3 group-focus-within:border-[#CE5C1C]">
+              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image width={100} height={100} alt="person" src={'/images/person.svg'} className="size-auto" />
                 <input
                   type="text"
                   name="name"
                   id="username"
                   placeholder="Full Name"
-                  className="text-[#777777] text-sm border-none outline-none w-full"
+                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
                 />
               </div>
             </label>
           </div>
           <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="email" className="text-[#1A1A1A] font-medium text-sm">
+            <label htmlFor="email" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Email<span className="text-[#CE5C1C]">*</span>
-              <div className="flex items-center gap-2 border rounded-lg px-2 py-3 group-focus-within:border-[#CE5C1C]">
+              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image width={100} height={100} alt="mail" src={'/images/mail.svg'} className="size-auto" />
                 <input
                   type="email"
                   name="input"
                   id="email"
                   placeholder="Email Address"
-                  className="text-[#777777] text-sm border-none outline-none w-full bg-transparent group-focus:border-[#CE5C1C]"
+                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full bg-transparent group-focus:border-[#CE5C1C]"
                   value={formData.input}
                   onChange={handleChange}
                   required
@@ -159,9 +165,9 @@ const LoginForm = () => {
           </div>
 
           <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="mobile-number" className="text-[#1A1A1A] font-medium text-sm ">
+            <label htmlFor="mobile-number" className="text-[#1A1A1A] font-medium text-xs lg:text-sm ">
               Mobile Number<span className="text-[#CE5C1C]">*</span>
-              <div className="flex items-center gap-2 border rounded-lg px-2 py-3 group-focus-within:border-[#CE5C1C]">
+              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image
                   width={100}
                   height={100}
@@ -174,23 +180,23 @@ const LoginForm = () => {
                   name="mobile-number"
                   id="mobile-number"
                   placeholder="Mobile Number"
-                  className="text-[#777777] text-sm border-none outline-none w-full"
+                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
                 />
               </div>
             </label>
           </div>
-     
+
           <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="password" className="text-[#1A1A1A] font-medium text-sm">
+            <label htmlFor="password" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Password<span className="text-[#CE5C1C]">*</span>
-              <div className="flex items-center gap-2 border rounded-lg px-2 py-3 group-focus-within:border-[#CE5C1C]">
+              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image width={100} height={100} alt="person" src={'/images/lock.svg'} className="size-auto" />
                 <input
                   type="password"
                   name="password"
                   id="password"
                   placeholder="Password"
-                  className="text-[#777777] text-sm border-none outline-none w-full"
+                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
                   value={formData.password}
                   onChange={handleChange}
                   required
@@ -202,11 +208,10 @@ const LoginForm = () => {
           </div>
           <button
             type="button"
-            className="bg-[#213B85] text-white font-extrabold text-xl w-full px-3 py-3 mt-3 rounded-xl"
+            className="bg-[#213B85] text-white font-extrabold text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
             onClick={handleSubmit}
           >
             {loading ? (
-                
               <svg
                 className="w-5 h-5 text-white animate-spin mx-auto"
                 xmlns="http://www.w3.org/2000/svg"
@@ -223,58 +228,6 @@ const LoginForm = () => {
           <div id="recaptcha-container"></div>
         </form>
       </div>
-      {/* <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-              Login to your account
-            </h1>
-            <form className="space-y-4 md:space-y-6">
-              <div>
-                <label htmlFor="emailOrPhone" className="block mb-2 text-sm font-medium text-gray-900">
-                  Email or Mobile Number
-                </label>
-                <input
-                  type="text"
-                  name="emailOrPhone"
-                  id="emailOrPhone"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="Enter your email or phone number"
-                  value={input}
-                  onChange={handleInputChange}
-                  required
-                />
-                {error.input && <p className="text-red-500 text-sm mt-2">{error.input}</p>}
-              </div>
-              <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  required
-                />
-                {error.password && <p className="text-red-500 text-sm mt-2">{error.password}</p>}
-              </div>
-              <button
-                id="sign-in-button"
-                onClick={handleSubmit}
-                type="button"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800 disabled:bg-gray-600"
-              >
-                Login
-              </button>
-              <div id="recaptcha-container"></div>
-            </form>
-          </div>
-        </div>
-      </div> */}
     </section>
   );
 };

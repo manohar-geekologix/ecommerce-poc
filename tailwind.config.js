@@ -12,6 +12,7 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "login-bg": "url('/images/Login_Screen.svg')",
+        "small-login-bg":"url('/images/Login_Small.svg')",
       },
       boxShadow:{
         "login-shadow":" 0px 0px 10px 0px #0000001A",
