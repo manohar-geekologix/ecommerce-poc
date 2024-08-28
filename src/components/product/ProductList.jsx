@@ -6,10 +6,17 @@ import Loader from "./Loader"
 
 const ProductList = () => {
     const [productData, setProductData] = useState([])
+    const [beautyProduct, setBeautyProduct] = useState([])
     const [loading, setLoading] = useState(true) // Initialize loading state as true
 
     useEffect(() => {
-        fetch('https://dummyjson.com/products/category/furniture')
+        fetch('https://dummyjson.com/products/category/beauty')
+            .then(res => res.json())
+            .then(data => {
+                setBeautyProduct(data.products)
+                setLoading(false) // Set loading to false once data is fetched
+            })
+        fetch('https://dummyjson.com/products')
             .then(res => res.json())
             .then(data => {
                 setProductData(data.products)
@@ -18,29 +25,62 @@ const ProductList = () => {
     }, [])
 
     return (
-        <main className="flex flex-col">
-            <div className="flex-1 py-8 px-4 md:px-8">
-                <h1 className='font-bold text-2xl pb-6'>Product's</h1>
-
+        <main>
+            <Image
+                src="/images/banner.svg"
+                height={100}
+                width={100}
+                className="size-full hidden md:block"
+            />
+            <Image
+                src="/images/mobile-banner.svg"
+                height={100}
+                width={100}
+                className="size-full block md:hidden"
+            />
+            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8">
+                <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Deals of the Day</h1>
                 {loading ? <Loader /> : (
                     // Display the products once loaded
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
-                        {productData.map(product => (
-                            <div key={product.id} className="rounded-lg divide-y-2 border bg-card text-card-foreground w-full max-w-lg shadow-md">
-                                <div className="grid gap-4">
+                    <div className="flex gap-3 lg:gap-6 overflow-auto">
+                        {beautyProduct.slice(0, 5).map(product => (
+                            <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
+                                <Link href={`/${product.id}`} className="grid gap-4">
                                     <div className="flex flex-col gap-2">
-                                        <Image src={product.thumbnail} alt={product.title} width={500} height={500} className="object-cover" />
-                                        <div className="flex justify-between items-center border-t p-4">
-                                            <div>
-                                                <div className="text-sm text-muted-foreground line-clamp-1">{product.title}</div>
-                                                <div className="text-lg font-medium text-green-600">${product.price}</div>
-                                            </div>
-                                            <div>
-                                                <Link href={`/${product.id}`} className='border p-2 px-4 rounded text-sm text-nowrap'>View Details</Link>
-                                            </div>
+                                        <div className="h-50">
+                                            <Image src={product.thumbnail} alt={product.title} width={700} height={700} className=" object-contain bg-gray-50" />
+                                        </div>
+                                        <div className="text-center max-lg:w-[200px]">
+                                            <div className="text-base font-semibold line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
+                                            <div className="text-base line-clamp-1 text-[#555555]">{product.title}</div>
+                                            <div className="text-xl font-medium text-[#213B85]">${product.price}</div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8">
+                <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Recommended for You</h1>
+                {loading ? <Loader /> : (
+                    // Display the products once loaded
+                    <div className="flex gap-3 lg:gap-6 overflow-auto">
+                        {productData?.slice(10, 15).map(product => (
+                            <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
+                                <Link href={`/${product.id}`} className="grid gap-4">
+                                    <div className="flex flex-col gap-2">
+                                        <div className="h-50">
+                                            <Image src={product.thumbnail} alt={product.title} width={1000} height={1000} className=" object-contain bg-gray-50" />
+                                        </div>
+                                        <div className="text-center max-lg:w-[200px]">
+                                            <div className="text-base font-semibold line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
+                                            <div className="text-base line-clamp-1 text-[#555555]">{product.title}</div>
+                                            <div className="text-xl font-medium text-[#213B85]">${product.price}</div>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
                         ))}
                     </div>
