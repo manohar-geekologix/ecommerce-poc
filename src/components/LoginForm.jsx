@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { MdOutlineVisibility, MdOutlineVisibilityOff, MdVisibility } from 'react-icons/md';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({ input: '', password: '' });
+  const [formData, setFormData] = useState({ input: '', password: '' ,phone:'',name:''});
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ const LoginForm = () => {
     const phoneRegex = /^[0-9]{10}$/;
 
     if (emailRegex.test(formData.input)) return 'email';
-    if (phoneRegex.test(formData.input)) return 'phone';
+    if (phoneRegex.test(formData.phone)) return 'phone';
     return null;
   };
   const sendOtp = async (email, otp) => {
@@ -143,6 +143,8 @@ const LoginForm = () => {
                 <input
                   type="text"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   id="username"
                   placeholder="Full Name"
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
@@ -183,12 +185,16 @@ const LoginForm = () => {
                 />
                 <input
                   type="text"
-                  name="mobile-number"
-                  id="mobile-number"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  id="phone"
                   placeholder="Mobile Number"
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
                 />
               </div>
+              {errors.input && <p className="text-[#CE5C1C] text-sm">{errors.input}</p>}
+
             </label>
           </div>
 
