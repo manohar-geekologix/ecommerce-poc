@@ -22,6 +22,28 @@ const SendCode = () => {
         }
     };
 
+    function generateUniqueString() {
+        const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        
+        if (characters.length < 30) {
+            throw new Error('Not enough unique characters to generate a 30-character string.');
+        }
+        
+        let uniqueString = '';
+        const usedIndexes = new Set();
+    
+        while (uniqueString.length < 30) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+    
+            if (!usedIndexes.has(randomIndex)) {
+                uniqueString += characters[randomIndex];
+                usedIndexes.add(randomIndex);
+            }
+        }
+    
+        return uniqueString;
+    }
+
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         const verificationId = localStorage.getItem('verificationId');
@@ -41,6 +63,8 @@ const SendCode = () => {
             const verification = localStorage.getItem('verificationOtp');
             const otpString = otp.join(''); // Combine array into a 
             if (otpString == verification) {
+                    let token = generateUniqueString();
+                    localStorage.setItem('accessToken',token)
                 localStorage.removeItem('verificationOtp');
                 router.push('/');
                 toast.success("OTP verified successfully!");

@@ -13,15 +13,15 @@ const LoginForm = () => {
 
     const router = useRouter();
 
-    useEffect(() => {
-        if (!window.recaptchaVerifier) {
-            window.recaptchaVerifier = new RecaptchaVerifier(
-                "recaptcha-container",
-                { size: "normal", callback: () => { }, "expired-callback": () => { } },
-                auth
-            );
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!window.recaptchaVerifier) {
+    //         window.recaptchaVerifier = new RecaptchaVerifier(
+    //             "recaptcha-container",
+    //             { size: "normal", callback: () => { }, "expired-callback": () => { } },
+    //             auth
+    //         );
+    //     }
+    // }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
