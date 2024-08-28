@@ -1,6 +1,10 @@
 'use client'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { FaRegHeart } from "react-icons/fa6";
+import { IoMdStar } from "react-icons/io";
+import { MdOutlineShoppingCart } from 'react-icons/md';
+
 
 const ProductDetails = ({ id }) => {
     const [product, setProduct] = useState(null)
@@ -23,69 +27,90 @@ const ProductDetails = ({ id }) => {
         </div>
     )
 
+    const renderStars = (rating) => {
+        const filledStars = Math.floor(rating); // Number of filled stars
+        const totalStars = 5; // Total stars to display
+        const outlinedStars = totalStars - filledStars; // Number of outlined stars
+
+        return (
+            <>
+                {Array.from({ length: filledStars }).map((_, index) => (
+                    <IoMdStar key={`filled-${index}`} className='text-[#FFC145] text-2xl' />
+                ))}
+                {Array.from({ length: outlinedStars }).map((_, index) => (
+                    <IoMdStar key={`filled-${index}`} className='text-[#D9D9D9] text-2xl' />
+                ))}
+            </>
+        );
+    };
+
     return (
-        <section className="flex flex-col">
-            <main className="flex-1 py-8 px-4 md:px-8">
-                <h1 className='font-bold text-2xl pb-6'>{product.title}</h1>
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="lg:w-1/2 2xl:w-1/3">
-                        <Image
-                            src={product.images[0]}
-                            alt={product.title}
-                            width={400}
-                            height={400}
-                            className="object-cover rounded-lg mx-auto"
-                        />
-                        <div className="flex mt-4 space-x-2">
-                            {product.images.slice(1).map((image, index) => (
-                                <Image
-                                    key={index}
-                                    src={image}
-                                    alt={`${product.title} image ${index + 1}`}
-                                    width={100}
-                                    height={100}
-                                    className="object-cover rounded-md border"
-                                />
-                            ))}
-                        </div>
+        <section className="flex flex-col md:flex-row justify-center py-8 px-4 md:px-8 gap-8">
+            <div>
+                <Image
+                    src={product.images[0]}
+                    alt={product.title}
+                    width={700}
+                    height={500}
+                    className="object-fit rounded bg-gray-50"
+                />
+            </div>
+            <div>
+                <h1 className='font-semibold text-2xl lg:text-3xl text-[#213B85] pb-2 lg:pb-4 uppercase'>{product.title}</h1>
+                <p className="text-balance text-[#555555] text-sm lg:text-base">{product.description}</p>
+                <div className="flex my-2 mb-3">{renderStars(product.rating)}</div>
+                <p className="text-2xl font-bold mb-4 text-[#213B85]">${product.price}</p>
+                <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen-md">
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
+                        <div class="text-[#555555] pb-0.5">category</div>
+                        <h4 class="text-[#213B85] font-semibold text-xl">fragrances</h4>
                     </div>
-                    <div className="">
-                        <p className="text-lg mb-4">{product.description}</p>
-                        <p className="text-2xl font-bold mb-4 text-green-500">${product.price}</p>
-                        <p className="mb-2">Category: <span className="font-medium">{product.category}</span></p>
-                        <p className="mb-2">Brand: <span className="font-medium">{product.brand}</span></p>
-                        <p className="mb-2">Availability: <span className={`font-medium ${product.stock > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                            {product.availabilityStatus}
-                        </span></p>
-                        <p className="mb-2">Stock: <span className="font-medium">{product.stock}</span></p>
-                        <p className="mb-2">SKU: <span className="font-medium">{product.sku}</span></p>
-                        <p className="mb-2">Rating: <span className="font-medium">{product.rating} / 5</span></p>
-                        <p className="mb-2">Warranty: <span className="font-medium">{product.warrantyInformation}</span></p>
-                        <p className="mb-2">Return Policy: <span className="font-medium">{product.returnPolicy}</span></p>
-                        <p className="mb-2">Shipping: <span className="font-medium">{product.shippingInformation}</span></p>
-                        <p className="mb-2">Tags: <span className="font-medium">{product.tags.join(', ')}</span></p>
-                        <p className="mb-2">Dimensions: <span className="font-medium">
-                            {`W: ${product.dimensions.width}" H: ${product.dimensions.height}" D: ${product.dimensions.depth}"`}
-                        </span></p>
-                        <p className="mb-6">Weight: <span className="font-medium">{product.weight} kg</span></p>
-                        <button className="bg-gray-800 text-white p-2 px-6 rounded">
-                            Add to Cart
-                        </button>
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
+                        <div class="text-[#555555] pb-0.5">Brand</div>
+                        <h4 class="text-[#213B85] font-semibold text-xl">Chanel</h4>
+                    </div>
+                    <div class="w-full border text-center bg-[#F6FFF5] border-[#04B800] rounded-md p-3">
+                        <div class="text-[#555555] pb-0.5">Availability</div>
+                        <h4 class="text-[#04B800] font-semibold text-xl">In Stock</h4>
+                    </div>
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
+                        <div class="text-[#555555] pb-0.5">Stock Left</div>
+                        <h4 class="text-[#213B85] font-semibold text-xl">41</h4>
                     </div>
                 </div>
-                <div className="mt-8">
-                    <h2 className="font-bold text-xl mb-4">Customer Reviews</h2>
-                    <div className="space-y-4">
+                <p className="my-2.5">Warranty: <span className="font-bold">{product.warrantyInformation}</span></p>
+                <p className="mb-2.5">Return Policy: <span className="font-bold">{product.returnPolicy}</span></p>
+                <p className="mb-2.5">Shipping: <span className="font-bold">{product.shippingInformation}</span></p>
+                <p className="mb-2.5">Tags: <span className="font-bold">{product.tags.join(', ')}</span></p>
+                <p className="mb-2.5">Dimensions: <span className="font-bold">
+                    {`W: ${product.dimensions.width}" H: ${product.dimensions.height}" D: ${product.dimensions.depth}"`}
+                </span></p>
+                <p className="mb-6">Weight: <span className="font-bold">{product.weight} kg</span></p>
+                <div className="flex gap-4 font-medium">
+                    <button className="border border-[#213B85] text-[#213B85] py-2 sm:py-3 px-3 sm:px-8 rounded-md text-sm lg:text-base lg:rounded-xl flex items-center gap-2">
+                        <FaRegHeart />
+                        Add to Watchlist
+                    </button>
+                    <button className="border bg-[#213B85] border-[#213B85] text-white py-2 sm:py-3 px-3 sm:px-8 rounded-md text-sm lg:text-base lg:rounded-xl flex items-center gap-2">
+                        <MdOutlineShoppingCart />
+                        Add to Watchlist
+                    </button>
+                </div>
+                <div>
+                    <div className='text-[#213B85] font-semibold text-lg mt-5 mb-3'>Product Review</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-3 max-w-screen-md">
                         {product.reviews.map((review, index) => (
-                            <div key={index} className="border p-4 rounded-lg shadow-sm">
-                                <p className="font-medium">Rating: {review.rating} / 5</p>
-                                <p className="italic">"{review.comment}"</p>
-                                <p className="text-sm text-gray-500">- {review.reviewerName ? review.reviewerName : 'Anonymous'}, {new Date(review.date).toLocaleDateString()}</p>
+                            <div key={index} className='p-4 rounded border text-center'>
+                                <div className='flex justify-center mb-2'>
+                                    {renderStars(review.rating)} {/* Rendering stars based on rating */}
+                                </div>
+                                <p className='font-semibold text-xl text-[#213B85]'>{review.comment}!</p>
+                                <span>{review.reviewerName ? review.reviewerName : 'Anonymous'}, {new Date(review.date).toLocaleDateString()}</span>
                             </div>
                         ))}
                     </div>
                 </div>
-            </main>
+            </div>
         </section>
     )
 }
