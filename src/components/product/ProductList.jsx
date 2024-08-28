@@ -24,7 +24,7 @@ const ProductList = () => {
 
                 {loading ? <Loader /> : (
                     // Display the products once loaded
-                    <div className="grid grid-cols-5 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
                         {productData.map(product => (
                             <div key={product.id} className="rounded-lg divide-y-2 border bg-card text-card-foreground w-full max-w-lg shadow-md">
                                 <div className="grid gap-4">

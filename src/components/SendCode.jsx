@@ -36,7 +36,7 @@ const SendCode = () => {
                 toast.success("OTP verified successfully!");
                 localStorage.removeItem('verificationId');
             } catch (error) {
-                toast.error("Envalid OTP ");
+                toast.error("Invalid OTP ");
             }
         } else {
             const verification = localStorage.getItem('verificationOtp');
@@ -47,14 +47,14 @@ const SendCode = () => {
                 router.push('/');
                 toast.success("OTP verified successfully!");
             } else {
-                toast.error("Envalid OTP ");
+                toast.error("Invalid OTP ");
             }
         }
     };
 
     return (
         <section className="bg-gray-50">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <header className="mb-8">
@@ -67,7 +67,7 @@ const SendCode = () => {
                                     <input
                                         key={index}
                                         type="text"
-                                        className="w-14 h-14 text-center text-2xl font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-indigo-100"
+                                        className="w-10 sm:w-14 h-10 sm:h-14 text-center text-2xl font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-indigo-100"
                                         maxLength="1"
                                         value={digit}
                                         onChange={e => handleChange(e.target, index)}
@@ -79,7 +79,7 @@ const SendCode = () => {
                                     />
                                 ))}
                             </div>
-                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800">Verify Code</button>
+                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gray-800">Verify Code</button>
                             <p className="text-sm font-light text-gray-500">
                                 Didn't receive the code? <a href="#" className="font-medium text-primary-600 hover:underline text-blue-600">Resend</a>
                             </p>
