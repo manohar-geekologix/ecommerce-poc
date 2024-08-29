@@ -67,7 +67,7 @@ const NavMenu = () => {
                     </div>
                 </nav>
             </header>
-            <div className='py-2 lg:hidden border-b sticky top-[66px] bg-white'>
+            <div className='py-2 lg:hidden border-b sticky top-[57px] bg-white'>
                 {handleResponsive()}
             </div>
         </>
