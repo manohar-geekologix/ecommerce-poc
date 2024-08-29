@@ -31,3 +31,9 @@ This is a Next.js project that includes various dependencies such as `js-cookie`
    ### react-dom: The entry point to the DOM and server renderers for React.
    ### react-hot-toast: A lightweight package for creating toast notifications.
    ### react-icons: A library for including popular icons in your React projects.
+
+## Images
+![image](https://github.com/user-attachments/assets/6964b8e0-5fd9-4b2e-900d-849565ddd40f)
+
+![image](https://github.com/user-attachments/assets/286a29be-6d58-4172-9dfd-89931430f8f7)
+
