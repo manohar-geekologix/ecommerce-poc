@@ -26,7 +26,7 @@ This is a Next.js (v14.2.6) project utilizing the app directory.
 4. **View the Application**
 
     ```
-    http://localhost:3000)
+    http://localhost:3000
     ```
 
 ## Dependencies
