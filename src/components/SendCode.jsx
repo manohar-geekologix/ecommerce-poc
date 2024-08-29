@@ -108,7 +108,7 @@ import { FaLessThan } from 'react-icons/fa';
           </div>
           <div className="sm:px-6 mt-4   lg:px-6">
             <header className="mb-3 ">
-              <h1 className="text-3xl font-bold mb-1 text-[#CE5C1C]">OTP Verification</h1>
+              <h1 className="text-xl lg:text-3xl font-semibold lg:font-bold mb-1 text-[#CE5C1C]">OTP Verification</h1>
               <p className="text-xs lg:text-sm text-[#213B85] ">Enter 6-digit digit code sent to your Email Address.</p>
             </header>
             <form
@@ -131,11 +131,11 @@ import { FaLessThan } from 'react-icons/fa';
               </div>
               <button
                 type="submit"
-                className="bg-[#213B85] text-white font-extrabold text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
+                className="bg-[#213B85] text-white font-extrabold text-base lg:text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
               >
                 Verify OTP
               </button>
-              <div className="text-[16px] flex  text-center justify-center items-center mr-8 mb-10 pb-7">
+              <div className="text-sm lg:text-base flex  text-center justify-center items-center mb-10 pb-7">
                 <Link href="/login" className="underline text-[#213B85]">
                   Back to login
                 </Link>
