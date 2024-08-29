@@ -71,7 +71,7 @@ const LoginForm = () => {
     }
 
     const user = users.find(
-      (u) => (u.email === formData.email || u.phone === formData.phone) && u.password === formData.password
+      (u) => (u.email === formData.email && formData.phone != '' &&  u.phone === formData.phone || u.email === formData.email && formData.phone == '' ) && u.password === formData.password
     );
 
     if (!user) return toast.error('No user found with that email or phone number.');
@@ -143,6 +143,7 @@ const LoginForm = () => {
                   type="text"
                   name="phone"
                   value={formData.phone}
+                  maxLength={10}
                   onChange={handleChange}
                   id="phone"
                   placeholder="Mobile Number"
