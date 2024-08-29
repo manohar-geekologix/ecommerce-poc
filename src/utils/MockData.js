@@ -29,5 +29,11 @@ export const users = [
     email: 'kirti.geekologix@gmail.com',
     password: '123456',
     phone: '1234567567',
+  },
+    {
+    name: 'Test Two',
+    email: 'jitesh.v2r@gmail.com',
+    password: '123456',
+    phone: '1234567567',
   }
 ];
