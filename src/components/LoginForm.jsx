@@ -83,30 +83,30 @@ const LoginForm = () => {
 
 
   return (
-    <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center lg:px-10 px-4 flex-col lg:flex-row">
-      <div className="lg:w-1/2 lg:block hidden">
-        <div className="flex flex-col gap-1 lg:gap-5">
+    <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row">
+      <div className="sm:w-1/2 text-start w-full">
+        <div className="flex flex-col lg:gap-5">
           <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
           <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Demo Project</h3>
         </div>
-        <div className="lg:block hidden">
+        <div className="lg:block hidden w-fit">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <div className="lg:hidden block text-center">
+        {/* <div className="lg:hidden block text-center">
           <div className="flex flex-col gap-1">
             <h1 className=" text-[#CE5C1C] font-medium text-2xl">Welcome to</h1>
             <h3 className="text-[#213B85] font-bold text-[32px]">Demo Project</h3>
           </div>
-        </div>
-        <form onSubmit={handleSubmit} className="bg-white px-5 py-3 lg:px-16 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[500px] mx-auto lg:absolute top-[-300px] left-14">
+        </div> */}
+        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-300px] xl:left-20">
           <Image
             width={100}
             height={100}
             alt="logo"
             src={'/images/Logo2.svg'}
-            className="mx-auto items-center size-auto"
+            className="mx-auto items-center size-1/2 lg:size-auto"
           />
           <div>
             <h3 className="text-[#CE5C1C] font-semibold text-[20px] lg:text-3xl">Login</h3>
@@ -198,7 +198,7 @@ const LoginForm = () => {
           </div>
           <button
             type="button"
-            className="bg-[#213B85] text-white font-extrabold text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
+            className="bg-[#213B85] text-white font-extrabold text-base lg:text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
             onClick={handleSubmit}
           >
             {loading ? (
