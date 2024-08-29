@@ -1,10 +1,8 @@
 const CryptoJS = require('crypto-js');
 const keys = 'Se5ZfFTzJ36PH7T996';
-// const brokerConfig = require('../_configuration/broker-config.json');
 // encrypt
 export function encrypt(data) {
   // Encrypt
-  // var encryptData = CryptoJS.AES.encrypt(JSON.stringify(data), 'Se5ZfFTzJ36PH7T6').toString();
   const key = CryptoJS.enc.Utf8.parse(keys);
   const iv = CryptoJS.enc.Utf8.parse(keys);
   const value = JSON.stringify(data);
@@ -23,9 +21,6 @@ export function encrypt(data) {
 
 // decrypt
 export function decrypt(data) {
-  // Decrypt
-  // var bytes = CryptoJS.AES.decrypt(data, 'Se5ZfFTzJ36PH7T6');
-  // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   const key = CryptoJS.enc.Utf8.parse(keys);
   const iv = CryptoJS.enc.Utf8.parse(keys);
   let decryptedData;
