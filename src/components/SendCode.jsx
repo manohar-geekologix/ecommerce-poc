@@ -96,7 +96,7 @@ import { FaLessThan } from 'react-icons/fa';
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <div className="bg-white px-5 py-3 lg:px-5 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-300px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24 ">
+        <div className="bg-white px-5 py-3 lg:px-5 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 xs:w-[360px] sm:w-[420px] md:w-[450px] mx-auto xl:absolute top-[-300px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
           <div className="min-h-[80px]">
             <Image
               width={100}
@@ -115,13 +115,13 @@ import { FaLessThan } from 'react-icons/fa';
               className="space-y-3 md:space-y-4  justify-center text-center items-center"
               onSubmit={handleVerifyOtp}
             >
-              <div className="flex justify-between sm:gap-3 gap-1" onPaste={handlePaste}>
+              <div className="flex justify-between sm:gap-2 gap-1" onPaste={handlePaste}>
                 {otp.map((digit, index) => (
                   <input
                     key={index}
                     ref={(el) => (inputRefs.current[index] = el)}
                     type="text"
-                    className="w-[45px] h-[42px] md:w-[60px] lg:h-[50px] lg:w-[45px] rounded-md text-center text-[16px] font-bold text-slate-900  border border-gray-300 hover:border-slate-500 appearance-none  outline-none focus:bg-white focus:border-[#CE5C1C] focus:ring-1 focus:ring-[#CE5C1C]"
+                    className="w-[35px] h-[42px] md:w-[40px] lg:h-[50px] lg:w-[45px] rounded-md text-center text-[16px] font-bold text-slate-900  border border-gray-300 hover:border-slate-500 appearance-none  outline-none focus:bg-white focus:border-[#CE5C1C] focus:ring-1 focus:ring-[#CE5C1C]"
                     maxLength="1"
                     value={digit}
                     onChange={(e) => handleChange(e.target, index)}
@@ -133,10 +133,9 @@ import { FaLessThan } from 'react-icons/fa';
                 type="submit"
                 className="bg-[#213B85] text-white font-extrabold text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
               >
-                Verify Code
+                Verify OTP
               </button>
               <div className="text-[16px] flex  text-center justify-center items-center mr-8 mb-10 pb-7">
-                <FaLessThan className="text-[#CE5C1C] size-4 mr-2" />
                 <Link href="/login" className="underline text-[#213B85]">
                   Back to login
                 </Link>
