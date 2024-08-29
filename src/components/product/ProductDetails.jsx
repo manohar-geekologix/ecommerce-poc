@@ -53,6 +53,7 @@ const ProductDetails = ({ id }) => {
                     width={700}
                     height={500}
                     className="object-fit rounded bg-gray-50"
+                    priority
                 />
             </div>
             <div>
