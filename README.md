@@ -1,6 +1,6 @@
 # Next.js Project
 
-This is a Next.js project that includes various dependencies such as `js-cookie`, `nodemailer`, and more. The project provides a solid foundation for building a modern web application with server-side rendering, API routes, and more.
+This is a Next.js (v14.2.6) project utilizing the app directory.
 
 ## Installation
 
@@ -21,6 +21,12 @@ This is a Next.js project that includes various dependencies such as `js-cookie`
 
     ```
     npm run dev
+    ```
+    
+4. **View the Application**
+
+    ```
+    http://localhost:3000)
     ```
 
 ## Dependencies
