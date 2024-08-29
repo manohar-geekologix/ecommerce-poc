@@ -40,7 +40,7 @@ const LoginForm = () => {
   const sendOtp = async (email, otp) => {
     try {
       setLoading(true);
-      const res = await fetch('/api/send-email', {
+      const res = await fetch(process.env.SEND_CODE, {
         method: 'POST',
         body: JSON.stringify({ email, otp }),
         headers: { 'Content-Type': 'application/json' },
