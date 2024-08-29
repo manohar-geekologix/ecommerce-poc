@@ -45,7 +45,7 @@ const ProductDetails = ({ id }) => {
     };
 
     return (
-        <section className="flex flex-col md:flex-row justify-center py-8 px-4 md:px-8 gap-8">
+        <section className="flex flex-col md:flex-row justify-center max-lg:pb-2 md:py-8 px-4 md:px-8 lg:px-16 gap-8">
             <div>
                 <Image
                     src={product.images[0]}
@@ -60,52 +60,54 @@ const ProductDetails = ({ id }) => {
                 <p className="text-balance text-[#555555] text-sm lg:text-base">{product.description}</p>
                 <div className="flex my-2 mb-3">{renderStars(product.rating)}</div>
                 <p className="text-2xl font-bold mb-4 text-[#213B85]">${product.price}</p>
-                <div class="grid grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen-md">
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
-                        <div class="text-[#555555] pb-0.5">category</div>
-                        <h4 class="text-[#213B85] font-semibold text-xl">fragrances</h4>
+                <div class="grid grid-cols-2 gap-2 capitalize lg:grid-cols-4 max-w-screen-md">
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div class="text-[#555555] pb-0.5 text-sm">category</div>
+                        <h4 class="text-[#213B85] font-semibold">{product.category}</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
-                        <div class="text-[#555555] pb-0.5">Brand</div>
-                        <h4 class="text-[#213B85] font-semibold text-xl">Chanel</h4>
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div class="text-[#555555] pb-0.5 text-sm">Brand</div>
+                        <h4 class="text-[#213B85] font-semibold">{product.brand}</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6FFF5] border-[#04B800] rounded-md p-3">
-                        <div class="text-[#555555] pb-0.5">Availability</div>
-                        <h4 class="text-[#04B800] font-semibold text-xl">In Stock</h4>
+                    <div class="w-full border text-center bg-[#F6FFF5] border-[#04B800] rounded-md p-2 lg:p-3">
+                        <div class="text-[#555555] pb-0.5 text-sm">Availability</div>
+                        <h4 class="text-[#04B800] font-semibold">In Stock</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-3">
-                        <div class="text-[#555555] pb-0.5">Stock Left</div>
-                        <h4 class="text-[#213B85] font-semibold text-xl">41</h4>
+                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div class="text-[#555555] pb-0.5 text-sm">Stock Left</div>
+                        <h4 class="text-[#213B85] font-semibold">{product.stock}</h4>
                     </div>
                 </div>
-                <p className="my-2.5">Warranty: <span className="font-bold">{product.warrantyInformation}</span></p>
-                <p className="mb-2.5">Return Policy: <span className="font-bold">{product.returnPolicy}</span></p>
-                <p className="mb-2.5">Shipping: <span className="font-bold">{product.shippingInformation}</span></p>
-                <p className="mb-2.5">Tags: <span className="font-bold">{product.tags.join(', ')}</span></p>
-                <p className="mb-2.5">Dimensions: <span className="font-bold">
+                <p className="my-2.5">Warranty: <span className="font-semibold">{product.warrantyInformation}</span></p>
+                <p className="mb-2.5">Return Policy: <span className="font-semibold">{product.returnPolicy}</span></p>
+                <p className="mb-2.5">Shipping: <span className="font-semibold">{product.shippingInformation}</span></p>
+                <p className="mb-2.5">Tags: <span className="font-semibold capitalize">{product.tags.join(', ')}</span></p>
+                <p className="mb-2.5">Dimensions: <span className="font-semibold">
                     {`W: ${product.dimensions.width}" H: ${product.dimensions.height}" D: ${product.dimensions.depth}"`}
                 </span></p>
-                <p className="mb-6">Weight: <span className="font-bold">{product.weight} kg</span></p>
+                <p className="mb-6">Weight: <span className="font-semibold">{product.weight} kg</span></p>
                 <div className="flex gap-4 font-medium">
-                    <button className="border border-[#213B85] text-[#213B85] py-2 sm:py-3 px-3 sm:px-8 rounded-md text-sm lg:text-base lg:rounded-xl flex items-center gap-2">
+                    <button className="border border-[#213B85] text-[#213B85] py-2 sm:py-3 px-3 sm:px-8 rounded-md text-sm lg:text-lg lg:rounded-xl flex items-center gap-2">
                         <FaRegHeart />
                         Add to Watchlist
                     </button>
-                    <button className="border bg-[#213B85] border-[#213B85] text-white py-2 sm:py-3 px-3 sm:px-8 rounded-md text-sm lg:text-base lg:rounded-xl flex items-center gap-2">
-                        <MdOutlineShoppingCart />
-                        Add to Watchlist
+                    <button className="border bg-[#213B85] border-[#213B85] text-white py-2 sm:py-3 px-7 sm:px-16 rounded-md text-sm lg:text-lg lg:rounded-xl flex items-center gap-2">
+                        <MdOutlineShoppingCart className='text-xl lg:text-2xl' />
+                        Add to Cart
                     </button>
                 </div>
                 <div>
                     <div className='text-[#213B85] font-semibold text-lg mt-5 mb-3'>Product Review</div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-3 max-w-screen-md">
                         {product.reviews.map((review, index) => (
-                            <div key={index} className='p-4 rounded border text-center'>
-                                <div className='flex justify-center mb-2'>
-                                    {renderStars(review.rating)} {/* Rendering stars based on rating */}
+                            <div key={index} className='p-2 lg:p-4 rounded border text-start lg:text-center'>
+                                <div className='max-lg:flex justify-between gap-4 items-center' >
+                                    <p className='font-semibold text-sm lg:text-base text-[#213B85]'>{review.comment}!</p>
+                                    <div className='flex justify-center mb-2'>
+                                        {renderStars(review.rating)} {/* Rendering stars based on rating */}
+                                    </div>
                                 </div>
-                                <p className='font-semibold text-xl text-[#213B85]'>{review.comment}!</p>
-                                <span>{review.reviewerName ? review.reviewerName : 'Anonymous'}, {new Date(review.date).toLocaleDateString()}</span>
+                                <span className='text-sm'>{review.reviewerName ? review.reviewerName : 'Anonymous'}, {new Date(review.date).toLocaleDateString()}</span>
                             </div>
                         ))}
                     </div>

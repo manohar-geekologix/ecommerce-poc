@@ -38,11 +38,11 @@ const ProductList = () => {
                 width={100}
                 className="size-full block md:hidden"
             />
-            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8">
+            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8 max-lg:pe-0">
                 <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Deals of the Day</h1>
                 {loading ? <Loader /> : (
                     // Display the products once loaded
-                    <div className="flex gap-3 lg:gap-6 overflow-auto">
+                    <div className="flex gap-3 lg:gap-6 overflow-auto no-scrollbar">
                         {beautyProduct.slice(0, 5).map(product => (
                             <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
                                 <Link href={`/${product.id}`} className="grid gap-4">
@@ -51,9 +51,9 @@ const ProductList = () => {
                                             <Image src={product.thumbnail} alt={product.title} width={700} height={700} className=" object-contain bg-gray-50" />
                                         </div>
                                         <div className="text-center max-lg:w-[200px]">
-                                            <div className="text-base font-semibold line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
-                                            <div className="text-base line-clamp-1 text-[#555555]">{product.title}</div>
-                                            <div className="text-xl font-medium text-[#213B85]">${product.price}</div>
+                                            <div className="text-base lg:text-xl font-semibold tracking-wide line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
+                                            <div className="text-sm lg:text-base line-clamp-1 text-[#555555]">{product.title}</div>
+                                            <div className="text-base lg:text-xl font-semibold tracking-wide text-[#213B85]">${product.price}</div>
                                         </div>
                                     </div>
                                 </Link>
@@ -62,11 +62,11 @@ const ProductList = () => {
                     </div>
                 )}
             </div>
-            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8">
+            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8 max-lg:pe-0">
                 <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Recommended for You</h1>
                 {loading ? <Loader /> : (
                     // Display the products once loaded
-                    <div className="flex gap-3 lg:gap-6 overflow-auto">
+                    <div className="flex gap-3 lg:gap-6 overflow-auto no-scrollbar  ">
                         {productData?.slice(10, 15).map(product => (
                             <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
                                 <Link href={`/${product.id}`} className="grid gap-4">
@@ -75,9 +75,9 @@ const ProductList = () => {
                                             <Image src={product.thumbnail} alt={product.title} width={1000} height={1000} className=" object-contain bg-gray-50" />
                                         </div>
                                         <div className="text-center max-lg:w-[200px]">
-                                            <div className="text-base font-semibold line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
-                                            <div className="text-base line-clamp-1 text-[#555555]">{product.title}</div>
-                                            <div className="text-xl font-medium text-[#213B85]">${product.price}</div>
+                                            <div className="text-base lg:text-xl font-semibold tracking-wide line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
+                                            <div className="text-sm lg:text-base line-clamp-1 text-[#555555]">{product.title}</div>
+                                            <div className="text-base lg:text-xl font-semibold tracking-wide text-[#213B85]">${product.price}</div>
                                         </div>
                                     </div>
                                 </Link>
