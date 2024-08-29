@@ -109,7 +109,7 @@ import { FaLessThan } from 'react-icons/fa';
           <div className="sm:px-6 mt-4   lg:px-6">
             <header className="mb-3 ">
               <h1 className="text-xl lg:text-3xl font-semibold lg:font-bold mb-1 text-[#CE5C1C]">OTP Verification</h1>
-              <p className="text-xs lg:text-sm text-[#213B85] ">Enter 6-digit digit code sent to your Email Address.</p>
+              <p className="text-xs lg:text-sm text-[#213B85] ">Enter 6-digit code sent to your Email Address.</p>
             </header>
             <form
               className="space-y-3 md:space-y-4  justify-center text-center items-center"
