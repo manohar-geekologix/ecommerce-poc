@@ -81,54 +81,33 @@ const LoginForm = () => {
     await sendOtp(user.email, otp);
   };
 
-
   return (
-    <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row">
+    <section className="bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-[100vh] flex justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row overflow-hidden">
       <div className="sm:w-1/2 text-start w-full">
-        <div className="flex flex-col lg:gap-5">
+        <div className="flex flex-col lg:gap-5 ">
           <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Demo Project</h3>
+          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">E-Commerce.</h3>
         </div>
-        <div className="lg:block hidden w-fit">
+        <div className="lg:block hidden w-fit min-h-[451px] pt-5 3xl:pt-36">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        {/* <div className="lg:hidden block text-center">
-          <div className="flex flex-col gap-1">
-            <h1 className=" text-[#CE5C1C] font-medium text-2xl">Welcome to</h1>
-            <h3 className="text-[#213B85] font-bold text-[32px]">Demo Project</h3>
+        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-300px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
+          <div className='min-h-[80px]'>
+            <Image
+              width={100}
+              height={100}
+              alt="logo"
+              src={'/images/Logo2.svg'}
+              className="mx-auto items-center size-1/2 lg:size-auto"
+            />
           </div>
-        </div> */}
-        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-300px] xl:left-20">
-          <Image
-            width={100}
-            height={100}
-            alt="logo"
-            src={'/images/Logo2.svg'}
-            className="mx-auto items-center size-1/2 lg:size-auto"
-          />
           <div>
             <h3 className="text-[#CE5C1C] font-semibold text-[20px] lg:text-3xl">Login</h3>
             <p className="text-[#213B85] font-normal text-xs lg:text-sm">Welcome Back!</p>
           </div>
-          <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="username" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
-              Name
-              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
-                <Image width={100} height={100} alt="person" src={'/images/person.svg'} className="size-auto" />
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  id="username"
-                  placeholder="Full Name"
-                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
-                />
-              </div>
-            </label>
-          </div>
+
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="email" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Email<span className="text-[#CE5C1C]">*</span>
@@ -190,7 +169,7 @@ const LoginForm = () => {
                   required
                 />
                 <div onClick={() => setShow(!show)} className="cursor-pointer">
-                  {show ? <MdOutlineVisibility fontSize={22} /> : <MdOutlineVisibilityOff fontSize={22} />}
+                  {show ? <MdOutlineVisibility fontSize={22} color='#555555' /> : <MdOutlineVisibilityOff color='#555555' fontSize={22} />}
                 </div>
               </div>
               {errors.password && <p className="text-[#CE5C1C] text-sm mt-2">{errors.password}</p>}
@@ -218,7 +197,7 @@ const LoginForm = () => {
           <div id="recaptcha-container"></div>
         </form>
       </div>
-    </section>
+    </section>  
   );
 };
 
