@@ -93,7 +93,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-300px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
+        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
           <div className='min-h-[80px]'>
             <Image
               width={100}
@@ -128,7 +128,7 @@ const LoginForm = () => {
             </label>
           </div>
 
-          <div className="group group-focus-within:border-[#CE5C1C]">
+          {/* <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="mobile-number" className="text-[#1A1A1A] font-medium text-xs lg:text-sm ">
               Mobile Number
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
@@ -152,7 +152,7 @@ const LoginForm = () => {
               </div>
               {errors.phone && <p className="text-[#CE5C1C] text-sm mt-2">{errors.phone}</p>}
             </label>
-          </div>
+          </div> */}
 
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="password" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
