@@ -96,7 +96,7 @@ import { FaLessThan } from 'react-icons/fa';
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <div className="bg-white px-5 py-3 lg:px-5 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 xs:w-[360px] sm:w-[420px] md:w-[450px] mx-auto xl:absolute top-[-300px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
+        <div className="bg-white px-5 py-3 lg:px-5 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 xs:w-[360px] sm:w-[420px] md:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
           <div className="min-h-[80px]">
             <Image
               width={100}
