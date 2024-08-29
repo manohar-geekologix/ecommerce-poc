@@ -38,7 +38,7 @@ const ProductList = () => {
                 width={100}
                 className="size-full block md:hidden"
             />
-            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8 max-lg:pe-0">
+            <div className="flex-1 py-4 lg:py-8 px-4 lg:px-8 max-lg:pe-0">
                 <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Deals of the Day</h1>
                 {loading ? <Loader /> : (
                     // Display the products once loaded
@@ -62,7 +62,7 @@ const ProductList = () => {
                     </div>
                 )}
             </div>
-            <div className="flex-1 py-4 lg:py-8 px-4 md:px-8 max-lg:pe-0">
+            <div className="flex-1 py-4 lg:py-8 px-4 lg:px-8 max-lg:pe-0">
                 <h1 className='font-bold lg:text-3xl pb-2 lg:pb-6 text-[#CE5C1C] lg:text-center'>Recommended for You</h1>
                 {loading ? <Loader /> : (
                     // Display the products once loaded
