@@ -61,7 +61,7 @@ const LoginForm = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!validateEmail(formData.email)) newErrors.email = 'Enter a valid email.';
+    if (!validateEmail(formData.email)) newErrors.email = 'Please enter correct email address.';
     if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
     if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters.';
 
