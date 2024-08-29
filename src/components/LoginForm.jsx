@@ -1,47 +1,42 @@
 'use client';
-import { auth } from '@/app/firebase';
 import { users } from '@/utils/MockData';
-import { RecaptchaVerifier } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { MdOutlineVisibility, MdOutlineVisibilityOff, MdVisibility } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({ input: '', password: '' ,phone:'',name:''});
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
-  //   useEffect(() => {
-  //     if (!window.recaptchaVerifier) {
-  //       window.recaptchaVerifier = new RecaptchaVerifier(
-  //         'recaptcha-container',
-  //         {
-  //           size: 'normal',
-  //           callback: (response) => {},
-  //           'expired-callback': () => {},
-  //         },
-  //         auth
-  //       );
-  //     }
-  //   }, [auth]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: '' }));
-  };
-  const validateInput = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10}$/;
 
-    if (emailRegex.test(formData.input)) return 'email';
-    if (phoneRegex.test(formData.phone)) return 'phone';
-    return null;
+    // Clear specific error if the input is valid
+    if (name === 'email' && errors.email && validateEmail(value)) {
+      setErrors((prev) => ({ ...prev, email: '' }));
+    } else if (name === 'phone' && errors.phone && validatePhone(value)) {
+      setErrors((prev) => ({ ...prev, phone: '' }));
+    } else if (name === 'password' && errors.password && value.length >= 6) {
+      setErrors((prev) => ({ ...prev, password: '' }));
+    }
   };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^[0-9]{10}$/;
+    return phoneRegex.test(phone);
+  };
+
   const sendOtp = async (email, otp) => {
     try {
       setLoading(true);
@@ -61,50 +56,32 @@ const LoginForm = () => {
       setLoading(false);
     }
   };
-  const generateOtp = () => {
-    return Math.floor(100000 + Math.random() * 900000);
-  };
 
-  const handleSubmit = async () => {
-    const inputType = validateInput();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = {};
 
-    if (!inputType) {
-      setErrors((prev) => ({ ...prev, input: 'Please enter a valid email or phone number.' }));
-      return;
-    }
+    if (!validateEmail(formData.email)) newErrors.email = 'Enter a valid email.';
+    if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
+    if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters.';
 
-    if (formData.password.length < 6) {
-      setErrors((prev) => ({ ...prev, password: 'Password must be at least 6 characters.' }));
+    if (Object.keys(newErrors).length) {
+      setErrors(newErrors);
       return;
     }
 
     const user = users.find(
-      (u) => (u.email === formData.input || u.phone === formData.input) && u.password === formData.password
+      (u) => (u.email === formData.email || u.phone === formData.phone) && u.password === formData.password
     );
 
-    if (!user) {
-      toast.error('No user found with that email or phone number.');
-      return;
-    }
+    if (!user) return toast.error('No user found with that email or phone number.');
 
     const otp = Math.floor(100000 + Math.random() * 900000);
     localStorage.setItem('verificationOtp', otp);
-
-    if (user.email === formData.input) {
-      await sendOtp(user.email, otp);
-    } else if (user.phone === formData.input) {
-      await sendOtp(user.email, otp);
-      // Uncomment if phone number OTP functionality is needed
-      // try {
-      //     const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.input.replace(/\D/g,'')}`, window.recaptchaVerifier);
-      //     localStorage.setItem('verificationId', confirmationResult.verificationId);
-      //     router.push('/send-code');
-      //     toast.success("OTP sent to your phone");
-      // } catch (error) {
-      //     handlePhoneError(error);
-      // }
-    }
+    await sendOtp(user.email, otp);
   };
+
+
   return (
     <section className="bg-gray-50 bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-screen flex justify-center items-center lg:px-10 px-4 flex-col lg:flex-row">
       <div className="lg:w-1/2 lg:block hidden">
@@ -123,7 +100,7 @@ const LoginForm = () => {
             <h3 className="text-[#213B85] font-bold text-[32px]">Demo Project</h3>
           </div>
         </div>
-        <form className="bg-white px-5 py-3 lg:px-16 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[500px] mx-auto lg:absolute top-[-300px] left-14">
+        <form onSubmit={handleSubmit} className="bg-white px-5 py-3 lg:px-16 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[500px] mx-auto lg:absolute top-[-300px] left-14">
           <Image
             width={100}
             height={100}
@@ -137,7 +114,7 @@ const LoginForm = () => {
           </div>
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="username" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
-              Name<span className="text-[#CE5C1C]">*</span>
+              Name
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image width={100} height={100} alt="person" src={'/images/person.svg'} className="size-auto" />
                 <input
@@ -159,7 +136,7 @@ const LoginForm = () => {
                 <Image width={100} height={100} alt="mail" src={'/images/mail.svg'} className="size-auto" />
                 <input
                   type="email"
-                  name="input"
+                  name="email"
                   id="email"
                   placeholder="Email Address"
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full bg-transparent group-focus:border-[#CE5C1C]"
@@ -168,13 +145,13 @@ const LoginForm = () => {
                   required
                 />
               </div>
-              {errors.input && <p className="text-[#CE5C1C] text-sm">{errors.input}</p>}
+              {errors.email && <p className="text-[#CE5C1C] text-sm mt-2">{errors.email}</p>}
             </label>
           </div>
 
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="mobile-number" className="text-[#1A1A1A] font-medium text-xs lg:text-sm ">
-              Mobile Number<span className="text-[#CE5C1C]">*</span>
+              Mobile Number
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <Image
                   width={100}
@@ -193,8 +170,7 @@ const LoginForm = () => {
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
                 />
               </div>
-              {errors.input && <p className="text-[#CE5C1C] text-sm">{errors.input}</p>}
-
+              {errors.phone && <p className="text-[#CE5C1C] text-sm mt-2">{errors.phone}</p>}
             </label>
           </div>
 
@@ -217,7 +193,7 @@ const LoginForm = () => {
                   {show ? <MdOutlineVisibility fontSize={22} /> : <MdOutlineVisibilityOff fontSize={22} />}
                 </div>
               </div>
-              {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
+              {errors.password && <p className="text-[#CE5C1C] text-sm mt-2">{errors.password}</p>}
             </label>
           </div>
           <button
@@ -227,7 +203,7 @@ const LoginForm = () => {
           >
             {loading ? (
               <svg
-                className="w-5 h-5 text-white animate-spin mx-auto"
+                className="w-5 h-7 text-white animate-spin mx-auto"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
