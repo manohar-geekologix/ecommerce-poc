@@ -1,86 +1,88 @@
 'use client';
-import { auth } from '@/app/firebase';
-import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import { useState, useRef } from 'react';
-import toast from 'react-hot-toast';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaLessThan } from 'react-icons/fa';
+// 
 
-const SendCode = () => {
-  const [otp, setOtp] = useState(new Array(6).fill('')); // Array to hold 6 digits
-  const inputRefs = useRef([]); // Array of refs to handle input focus
-  const router = useRouter();
-
-  const handleChange = (element, index) => {
-    if (isNaN(element.value)) return;
-
-    const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-
-    // Move focus to the next input box if current is filled
-    if (element.value && index < 5) {
-      inputRefs.current[index + 1].focus();
-    }
-  };
-
-  const handleKeyUp = (e, index) => {
-    if (e.key === 'Backspace' && !e.target.value && index > 0) {
-      inputRefs.current[index - 1].focus();
-    }
-  };
-
-  const handlePaste = (e) => {
-    const pasteData = e.clipboardData.getData('text').slice(0, 6);
-    if (!/^\d+$/.test(pasteData)) return; // Ensure only digits are pasted
-    const newOtp = pasteData.split('');
-    setOtp(newOtp);
-
-    // Move focus to the last filled input
-    inputRefs.current[Math.min(newOtp.length - 1, 5)].focus();
-  };
-
-  function generateUniqueString() {
-    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-    if (characters.length < 30) {
-      throw new Error('Not enough unique characters to generate a 30-character string.');
-    }
-
-    let uniqueString = '';
-    const usedIndexes = new Set();
-
-    while (uniqueString.length < 30) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-
-      if (!usedIndexes.has(randomIndex)) {
-        uniqueString += characters[randomIndex];
-        usedIndexes.add(randomIndex);
-      }
-    }
-
-    return uniqueString;
-  }
-
-  const handleVerifyOtp = async (e) => {
-    e.preventDefault();
-    const otpString = otp.join(""); // Combine array into a string
-
+  const SendCode = () => {
+    const [otp, setOtp] = useState(new Array(6).fill("")); // Array to hold 6 digits
+    const inputRefs = useRef([]); // Array of refs to handle input focus
+    const router = useRouter();
    
-      const verification = localStorage.getItem("verificationOtp");
-      if (otpString === verification) {
-        let token = generateUniqueString();
-        Cookies.set('accessToken', token, { expires: 7, path: '/' });
-        localStorage.removeItem('verificationOtp');
-        router.push('/');
-        toast.success('OTP verified successfully!');
-      } else {
-        toast.error('Invalid OTP');
+    const handleChange = (element, index) => {
+      if (isNaN(element.value)) return;
+   
+      const newOtp = [...otp];
+      newOtp[index] = element.value;
+      setOtp(newOtp);
+   
+      // Move focus to the next input box if current is filled
+      if (element.value && index < 5) {
+        inputRefs.current[index + 1].focus();
       }
-  };
+    };
+   
+    const handleKeyUp = (e, index) => {
+      if (e.key === "Backspace" && !e.target.value && index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
+    };
+   
+    const handlePaste = (e) => {
+      const pasteData = e.clipboardData.getData("text").slice(0, 6);
+      if (!/^\d+$/.test(pasteData)) return; // Ensure only digits are pasted
+      const newOtp = pasteData.split("");
+      setOtp(newOtp);
+   
+      // Move focus to the last filled input
+      inputRefs.current[Math.min(newOtp.length - 1, 5)].focus();
+    };
+   
+    function generateUniqueString() {
+      const characters =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   
+      if (characters.length < 30) {
+        throw new Error(
+          "Not enough unique characters to generate a 30-character string."
+        );
+      }
+   
+      let uniqueString = "";
+      const usedIndexes = new Set();
+   
+      while (uniqueString.length < 30) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+   
+        if (!usedIndexes.has(randomIndex)) {
+          uniqueString += characters[randomIndex];
+          usedIndexes.add(randomIndex);
+        }
+      }
+   
+      return uniqueString;
+    }
+   
+    const handleVerifyOtp = async (e) => {
+      e.preventDefault();
+      const otpString = otp.join(""); // Combine array into a string
+   
+     
+        const verification = localStorage.getItem("verificationOtp");
+        if (otpString === verification) {
+          let token = generateUniqueString();
+          Cookies.set("accessToken", token, { expires: 7, path: "/" });
+          localStorage.removeItem("verificationOtp");
+          router.push("/");
+          toast.success("OTP verified successfully!");
+        } else {
+          toast.error("Invalid OTP");
+        }
+    };
 
   return (
     <section className="bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-[100vh] flex justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row overflow-hidden">
