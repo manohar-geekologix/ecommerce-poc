@@ -45,7 +45,7 @@ const ProductList = () => {
                     <div className="flex gap-3 lg:gap-6 overflow-auto no-scrollbar">
                         {beautyProduct.slice(0, 5).map(product => (
                             <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
-                                <Link href={`/${product.id}`} className="grid gap-4">
+                                <Link href={`/product/${product.id}`} className="grid gap-4">
                                     <div className="flex flex-col gap-2">
                                         <div className="h-50">
                                             <Image src={product.thumbnail} alt={product.title} width={700} height={700} className=" object-contain bg-gray-50" />
@@ -69,7 +69,7 @@ const ProductList = () => {
                     <div className="flex gap-3 lg:gap-6 overflow-auto no-scrollbar  ">
                         {productData?.slice(10, 15).map(product => (
                             <div key={product.id} className="rounded divide-y-2 w-full max-w-lg">
-                                <Link href={`/${product.id}`} className="grid gap-4">
+                                <Link href={`/product/${product.id}`} className="grid gap-4">
                                     <div className="flex flex-col gap-2">
                                         <div className="h-50">
                                             <Image src={product.thumbnail} alt={product.title} width={1000} height={1000} className=" object-contain bg-gray-50" />

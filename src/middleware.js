@@ -7,7 +7,7 @@ export function middleware(request) {
 
 
     if (publicPath && token) {
-        return NextResponse.redirect(new URL('/', request.nextUrl));
+        return NextResponse.redirect(new URL('/product', request.nextUrl));
     }
 
     if (!publicPath && !token) {

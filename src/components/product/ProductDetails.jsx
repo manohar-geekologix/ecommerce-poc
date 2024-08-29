@@ -8,6 +8,7 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const ProductDetails = ({ id }) => {
     const [product, setProduct] = useState(null)
+    console.log("🚀 ~ ProductDetails ~ product:", product)
 
     useEffect(() => {
         if (id) {
@@ -61,22 +62,22 @@ const ProductDetails = ({ id }) => {
                 <p className="text-balance text-[#555555] text-sm lg:text-base">{product.description}</p>
                 <div className="flex my-2 mb-3">{renderStars(product.rating)}</div>
                 <p className="text-2xl font-bold mb-4 text-[#213B85]">${product.price}</p>
-                <div class="grid grid-cols-2 gap-2 capitalize lg:grid-cols-4 max-w-screen-md">
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
-                        <div class="text-[#555555] pb-0.5 text-sm">category</div>
-                        <h4 class="text-[#213B85] font-semibold">{product.category}</h4>
+                <div className="grid grid-cols-2 gap-2 capitalize lg:grid-cols-4 max-w-screen-md">
+                    <div className="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div className="text-[#555555] pb-0.5 text-sm">category</div>
+                        <h4 className="text-[#213B85] font-semibold">{product.category}</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
-                        <div class="text-[#555555] pb-0.5 text-sm">Brand</div>
-                        <h4 class="text-[#213B85] font-semibold">{product.brand}</h4>
+                    <div className="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div className="text-[#555555] pb-0.5 text-sm">Brand</div>
+                        <h4 className="text-[#213B85] font-semibold">{product.brand}</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6FFF5] border-[#04B800] rounded-md p-2 lg:p-3">
-                        <div class="text-[#555555] pb-0.5 text-sm">Availability</div>
-                        <h4 class="text-[#04B800] font-semibold">In Stock</h4>
+                    <div className="w-full border text-center bg-[#F6FFF5] border-[#04B800] rounded-md p-2 lg:p-3">
+                        <div className="text-[#555555] pb-0.5 text-sm">Availability</div>
+                        <h4 className="text-[#04B800] font-semibold">In Stock</h4>
                     </div>
-                    <div class="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
-                        <div class="text-[#555555] pb-0.5 text-sm">Stock Left</div>
-                        <h4 class="text-[#213B85] font-semibold">{product.stock}</h4>
+                    <div className="w-full border text-center bg-[#F6F9FF] border-[#213B85] rounded-md p-2 lg:p-3">
+                        <div className="text-[#555555] pb-0.5 text-sm">Stock Left</div>
+                        <h4 className="text-[#213B85] font-semibold">{product.stock}</h4>
                     </div>
                 </div>
                 <p className="my-2.5">Warranty: <span className="font-semibold">{product.warrantyInformation}</span></p>

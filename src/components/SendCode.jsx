@@ -77,7 +77,7 @@ import { FaLessThan } from 'react-icons/fa';
           let token = generateUniqueString();
           Cookies.set("accessToken", token, { expires: 7, path: "/" });
           localStorage.removeItem("verificationOtp");
-          router.push("/");
+          router.push("/product");
           toast.success("OTP verified successfully!");
         } else {
           toast.error("Invalid OTP");

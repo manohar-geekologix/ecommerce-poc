@@ -22,7 +22,7 @@ const NavMenu = () => {
     }
 
     const navLinks = [
-        { href: '/', label: 'Home' },
+        { href: '/product', label: 'Home' },
         { href: '/about', label: 'About Us' },
         { href: '/contact-us', label: 'Contact Us' },
     ]
@@ -46,7 +46,7 @@ const NavMenu = () => {
         <>
             <header className="text-[#213B85] text-primary-foreground py-3 lg:py-4 lg:px-5 border-b sticky top-0 bg-white">
                 <nav className="flex items-center justify-between px-5 lg:px-10">
-                    <Link href="/" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
+                    <Link href="/product" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
                         <Image src={'/images/header-logo.svg'} width={100} height={100} className='size-full' />
                     </Link>
                     <div className="hidden lg:block">{handleResponsive()}</div>
