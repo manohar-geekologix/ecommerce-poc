@@ -1,98 +1,33 @@
-Project Name
-A brief description of your project.
+# Next.js Project
 
-Table of Contents
-Getting Started
-Prerequisites
-Installation
-Running the Project
-Project Structure
-Scripts
-Environment Variables
-Linting and Formatting
-Testing
-Deployment
-Contributing
-License
-Getting Started
-Prerequisites
-Ensure you have the following tools installed:
+This is a Next.js project that includes various dependencies such as `js-cookie`, `nodemailer`, and more. The project provides a solid foundation for building a modern web application with server-side rendering, API routes, and more.
 
-Node.js (v14.x or later)
-npm or yarn
-Installation
-Clone the repository:
-```bash git clone https://github.com/your-username/your-project-name.git cd your-project-name ```
+## Installation
 
-Install dependencies:
-Using npm:
+1. **Clone the repository**
 
-```bash npm install ```
+   ```bash
+   git clone https://github.com/manohar-geekologix/react-poc.git
+   cd react-poc
+   ```
 
-Or using yarn:
+2. **Install dependencies**
 
-```bash yarn install ```
+   ```
+   npm install
+   ```
 
-Running the Project
-To run the project locally:
+3. **Running the Project**
 
-```bash npm run dev ```
+    ```
+    npm run dev
+    ```
 
-Or with yarn:
-
-```bash yarn dev ```
-
-Open your browser and navigate to `http://localhost:3000`.
-
-Project Structure
-A brief overview of the project structure:
-
-``` |-- /components # Reusable components |-- /pages # Page components |-- /public # Static assets |-- /styles # Global and component-specific styles |-- /utils # Utility functions and helpers |-- /hooks # Custom hooks |-- /contexts # React Contexts for state management |-- /api # API routes (if any) |-- next.config.js # Next.js configuration |-- package.json # Project dependencies and scripts |-- README.md # Project documentation ```
-
-Scripts
-The following scripts are available in the project:
-
-`dev`: Runs the project in development mode.
-`build`: Builds the project for production.
-`start`: Starts the production server.
-`lint`: Lints the code using ESLint.
-`format`: Formats the code using Prettier.
-Example:
-
-```bash npm run build npm run start ```
-
-Environment Variables
-Create a `.env.local` file at the root of the project to store environment variables:
-
-``` NEXT_PUBLIC_API_URL=https://api.yourdomain.com NEXT_PUBLIC_ANALYTICS_ID=your-google-analytics-id ```
-
-Linting and Formatting
-This project uses ESLint and Prettier for linting and formatting:
-
-Linting: To check for code quality issues, run:
-```bash npm run lint ```
-
-Formatting: To automatically format your code, run:
-```bash npm run format ```
-
-Testing
-Add details about testing frameworks and how to run tests (if applicable).
-
-```bash npm run test ```
-
-Deployment
-To deploy the application, you can use platforms like Vercel or Netlify. The following guide is for deploying to Vercel:
-
-Install Vercel CLI:
-```bash npm install -g vercel ```
-
-Deploy the project:
-```bash vercel ```
-
-Follow the prompts to set up and deploy the project.
-
-Contributing
-If you would like to contribute, please follow the guidelines in `CONTRIBUTING.md`.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Dependencies
+   ### js-cookie: A simple, lightweight JavaScript API for handling cookies.
+   ### next: The React framework for production.
+   ### nodemailer: A module for Node.js applications to allow easy email sending.
+   ### react: A JavaScript library for building user interfaces.
+   ### react-dom: The entry point to the DOM and server renderers for React.
+   ### react-hot-toast: A lightweight package for creating toast notifications.
+   ### react-icons: A library for including popular icons in your React projects.
