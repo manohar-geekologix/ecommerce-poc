@@ -22,21 +22,23 @@ const LoginForm = () => {
 
   const auth = getAuth(firebaseApp);
 
-  const recaptchaContainerRef = useRef(null);
   const recaptchaVerifierRef = useRef(null);
 
+
   useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptchaScript = () => {
-      const script = document.createElement('script');
-      script.src = `https://www.google.com/recaptcha/api.js?render=${'6LcwsDIqAAAAAFB_gyR-ejFwT4dQKHcgfWCLYcrb'}`;
-      script.async = true;
-      document.body.appendChild(script);
-    };
+    // Initialize RecaptchaVerifier
+    if (!recaptchaVerifierRef.current) {
+      recaptchaVerifierRef.current = new RecaptchaVerifier('recaptcha-container', {
+        size: 'invisible',
+        callback: () => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          handleSubmit(e);
+        },
+      },
+        auth
+      );
+    }
 
-    loadRecaptchaScript();
-
-    // Cleanup function
     return () => {
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear();
@@ -45,19 +47,39 @@ const LoginForm = () => {
     };
   }, []);
 
-  const initializeRecaptcha = () => {
-    if (!recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current =  new RecaptchaVerifier(
-                      "recaptcha-container",
-                      {
-                        size: "invisible",
-                        callback: (response) => {},
-                        "expired-callback": () => {},
-                      },
-                      auth
-                    );
-    }
-  };
+  // useEffect(() => {
+  //   // Load reCAPTCHA script
+  //   const loadRecaptchaScript = () => {
+  //     const script = document.createElement('script');
+  //     script.src = `https://www.google.com/recaptcha/api.js?render=${'6LcwsDIqAAAAAFB_gyR-ejFwT4dQKHcgfWCLYcrb'}`;
+  //     script.async = true;
+  //     document.body.appendChild(script);
+  //   };
+
+  //   loadRecaptchaScript();
+
+  //   // Cleanup function
+  //   return () => {
+  //     if (recaptchaVerifierRef.current) {
+  //       recaptchaVerifierRef.current.clear();
+  //       recaptchaVerifierRef.current = null;
+  //     }
+  //   };
+  // }, []);
+
+  // const initializeRecaptcha = () => {
+  //   if (!recaptchaVerifierRef.current) {
+  //     recaptchaVerifierRef.current =  new RecaptchaVerifier(
+  //                     "recaptcha-container",
+  //                     {
+  //                       size: "invisible",
+  //                       callback: (response) => {},
+  //                       "expired-callback": () => {},
+  //                     },
+  //                     auth
+  //                   );
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -144,9 +166,10 @@ const LoginForm = () => {
 
     const otp = Math.floor(100000 + Math.random() * 900000);
     // onCaptchVerify()
-    initializeRecaptcha();
+    const appVerifier = recaptchaVerifierRef.current;
     try {
-      const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.phone.replace(/\D/g,'')}`, recaptchaVerifierRef.current);
+
+      const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.phone.replace(/\D/g,'')}`, appVerifier);
       // setVerificationId(confirmationResult.verificationId);
       localStorage.setItem('verificationId', confirmationResult.verificationId);
       setMessage('OTP sent successfully!');
