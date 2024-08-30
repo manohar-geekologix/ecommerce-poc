@@ -1,8 +1,8 @@
 // Example `users` array
 export const users = [
   {
-    name: 'nikhiltest',
-    email: 'nikhiltest@mailinator.com',
+    name: 'nikhil',
+    email: 'nikhil@mailinator.com',
     password: '123456',
     phone: '1231231234',
   },

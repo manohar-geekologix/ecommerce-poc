@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "js-cookie": "^3.0.5",
+    "firebase": "^9.15.0",
     "next": "14.2.6",
     "nodemailer": "^6.9.9",
     "react": "^18",

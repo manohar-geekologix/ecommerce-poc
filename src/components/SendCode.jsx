@@ -69,7 +69,23 @@ import { FaLessThan } from 'react-icons/fa';
    
     const handleVerifyOtp = async (e) => {
       e.preventDefault();
+      const verificationId = localStorage.getItem('verificationId');
       const otpString = otp.join(""); // Combine array into a string
+      if (verificationId) {
+            
+        const otpString = otp.join(''); // Combine array into a string
+
+        try {
+            const credential = PhoneAuthProvider.credential(verificationId, otpString);
+            await signInWithCredential(auth, credential);
+            router.push('/');
+            toast.success("OTP verified successfully!");
+            localStorage.removeItem('verificationId');
+        } catch (error) {
+            toast.error("Envalid OTP ");
+        }
+    }else{
+ 
    
      
         const verification = localStorage.getItem("verificationOtp");
@@ -82,6 +98,7 @@ import { FaLessThan } from 'react-icons/fa';
         } else {
           toast.error("Invalid OTP");
         }
+      }
     };
 
   return (
