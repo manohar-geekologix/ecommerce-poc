@@ -53,7 +53,7 @@ const ProductDetails = ({ id }) => {
                     alt={product.title}
                     width={700}
                     height={500}
-                    className="object-fit rounded bg-gray-50"
+                    className="object-fit rounded bg-gray-100"
                     priority
                 />
             </div>

@@ -23,6 +23,7 @@ const NavMenu = () => {
 
     const navLinks = [
         { href: '/product', label: 'Home' },
+        { href: '/inventory', label: 'Inventory' },
         { href: '/about', label: 'About Us' },
         { href: '/contact-us', label: 'Contact Us' },
     ]

@@ -48,7 +48,7 @@ const ProductList = () => {
                                 <Link href={`/product/${product.id}`} className="grid gap-4">
                                     <div className="flex flex-col gap-2">
                                         <div className="h-50">
-                                            <Image src={product.thumbnail} alt={product.title} width={700} height={700} className=" object-contain bg-gray-50" />
+                                            <Image src={product.thumbnail} alt={product.title} width={700} height={700} className=" object-contain bg-gray-100" />
                                         </div>
                                         <div className="text-center max-lg:w-[200px]">
                                             <div className="text-base lg:text-xl font-semibold tracking-wide line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
@@ -72,7 +72,7 @@ const ProductList = () => {
                                 <Link href={`/product/${product.id}`} className="grid gap-4">
                                     <div className="flex flex-col gap-2">
                                         <div className="h-50">
-                                            <Image src={product.thumbnail} alt={product.title} width={1000} height={1000} className=" object-contain bg-gray-50" />
+                                            <Image src={product.thumbnail} alt={product.title} width={1000} height={1000} className=" object-contain bg-gray-100" />
                                         </div>
                                         <div className="text-center max-lg:w-[200px]">
                                             <div className="text-base lg:text-xl font-semibold tracking-wide line-clamp-1 text-[#213B85] uppercase">{product.category}</div>
