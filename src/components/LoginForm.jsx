@@ -3,6 +3,7 @@ import { users } from '@/utils/MockData';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FaRegUser } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 
@@ -100,7 +101,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative">
-        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
+        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24" onSubmit={handleSubmit}>
           <div className='min-h-[80px]'>
             <Image
               width={100}
@@ -117,14 +118,14 @@ const LoginForm = () => {
 
           <div className="group group-focus-within:border-[#CE5C1C]">
             <label htmlFor="email" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
-              Email<span className="text-[#CE5C1C]">*</span>
+              Email or Mobile Number<span className="text-[#CE5C1C]">*</span>
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
-                <Image width={100} height={100} alt="mail" src={'/images/mail.svg'} className="size-auto" />
+                <FaRegUser className='mx-1.5' />
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Email Address"
+                  placeholder="Email address or Mobile Number"
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full bg-transparent group-focus:border-[#CE5C1C]"
                   value={formData.input}
                   onChange={handleChange}
