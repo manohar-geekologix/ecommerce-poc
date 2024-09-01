@@ -7,6 +7,8 @@ import { GrFormPrevious } from "react-icons/gr";
 
 import { IoSearchSharp } from 'react-icons/io5';
 import ProductTable from './ProductTable';
+import Loader from './Loader';
+import toast from 'react-hot-toast';
 
 const categoryList = [
     { name: 'All', icon: <MdOutlineStorefront /> },
@@ -23,6 +25,7 @@ const Inventory = () => {
     const [productData, setProductData] = useState([]);
     const [activeCategory, setActiveCategory] = useState('All');
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const url = activeCategory !== 'All'
@@ -45,12 +48,18 @@ const Inventory = () => {
             .then(() => {
                 // Remove the deleted product from the state
                 setProductData(productData.filter(product => product.id !== productId));
+                toast.success('Deleted successfully')
             })
             .catch(error => console.error('Error deleting product:', error));
     };
 
+    const filteredProducts = productData.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div className="p-5 pt-2 lg:p-10">
+        <div className="p-4 pt-2 lg:p-10">
             <div className="flex space-x-4 mb-6 border-b-2 overflow-auto no-scrollbar">
                 {categoryList?.map((category) => (
                     <button
@@ -66,7 +75,7 @@ const Inventory = () => {
                 ))}
             </div>
             <div className="bg-white flex flex-col">
-                <div className="flex justify-between items-center border-b p-4 px-8 text-[#777777]">
+                <div className="flex justify-between items-center lg:border-b lg:p-4 lg:px-8 text-[#777777]">
                     <div className='max-md:hidden'>
                         show
                         <select className='bg-transparent border rounded-lg ps-1 pe-3 mx-3 outline-none' name="" id="">
@@ -74,18 +83,26 @@ const Inventory = () => {
                         </select>
                         Entries
                     </div>
-                    <div className='flex items-center border rounded-md py-1 max-lg:w-full'>
+                    <div className='flex items-center border rounded-md py-1 max-md:w-full'>
                         <IoSearchSharp className='mx-2 text-xl' />
-                        <input type="text" placeholder='Search' className=' p-1 outline-none' />
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="p-1 outline-none"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
                     </div>
                 </div>
-                <ProductTable {...{ productData, activeCategory, handleDelete }} />
+                {!loading && (
+                    <ProductTable {...{ filteredProducts, handleDelete }} />
+                ) || <Loader />}
             </div>
-            <div className="bg-white flex md:flex-row max-md:gap-2 flex-col items-center justify-between mb-6 border-t-2 p-4 px-8">
-                <div>
+            <div className="bg-white flex md:flex-row max-md:gap-2 flex-col items-center justify-between md:mb-6 border-t-2 p-4 px-8">
+                <div className='max-md:text-sm'>
                     Showing 1-10 of 60 Entries
                 </div>
-                <div class="flex justify-center items-center space-x-2 ">
+                <div class="flex justify-center items-center space-x-2 max-md:text-sm">
                     <button class="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         <GrFormPrevious /> Prev
                     </button>
