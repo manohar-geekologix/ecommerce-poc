@@ -50,15 +50,15 @@ const Inventory = () => {
     };
 
     return (
-        <div className="p-5 lg:p-10">
+        <div className="p-5 pt-2 lg:p-10">
             <div className="flex space-x-4 mb-6 border-b-2 overflow-auto no-scrollbar">
                 {categoryList?.map((category) => (
                     <button
                         key={category.name}
                         onClick={() => setActiveCategory(category.name)}
-                        className={`flex items-center gap-2 pb-4 px-4 py-2 text-lg text-[#213B85] ${activeCategory == category.name && `border-[#213B85] border-b-2`} capitalize`}
+                        className={`flex items-center gap-2 lg:pb-4 lg:px-4 py-2 text-base lg:text-lg text-[#213B85] ${activeCategory == category.name && `border-[#213B85] border-b-2 font-bold`} capitalize`}
                     >
-                        <div className={`p-2 rounded-full ${activeCategory == category.name && 'bg-[#213B85] text-white' || 'bg-[#EAF1FF]'}`}>
+                        <div className={`p-1 lg:p-2 rounded-full ${activeCategory == category.name && 'bg-[#213B85] text-white' || 'bg-[#EAF1FF]'}`}>
                             {category.icon}
                         </div>
                         {category.name}
@@ -69,14 +69,14 @@ const Inventory = () => {
                 <div className="flex justify-between items-center border-b p-4 px-8 text-[#777777]">
                     <div className='max-md:hidden'>
                         show
-                        <select className='bg-transparent border rounded-lg ps-1 pe-3 mx-3' name="" id="">
+                        <select className='bg-transparent border rounded-lg ps-1 pe-3 mx-3 outline-none' name="" id="">
                             <option value="10">10</option>
                         </select>
                         Entries
                     </div>
                     <div className='flex items-center border rounded-md py-1 max-lg:w-full'>
                         <IoSearchSharp className='mx-2 text-xl' />
-                        <input type="text" placeholder='Search' className=' p-1' />
+                        <input type="text" placeholder='Search' className=' p-1 outline-none' />
                     </div>
                 </div>
                 <ProductTable {...{ productData, activeCategory, handleDelete }} />
