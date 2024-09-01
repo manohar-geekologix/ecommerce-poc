@@ -23,13 +23,14 @@ const NavMenu = () => {
 
     const navLinks = [
         { href: '/product', label: 'Home' },
+        { href: '/inventory', label: 'Inventory' },
         { href: '/about', label: 'About Us' },
         { href: '/contact-us', label: 'Contact Us' },
     ]
 
     const handleResponsive = () => {
         return (
-            <div className='text-[#213B85] flex gap-6 lg:text-xl items-baseline font-medium justify-center'>
+            <div className='text-[#213B85] flex gap-3 sm:gap-6 lg:text-xl items-baseline font-medium justify-center'>
                 {navLinks.map((link) => (
                     <Link
                         key={link.href}
@@ -67,7 +68,7 @@ const NavMenu = () => {
                     </div>
                 </nav>
             </header>
-            <div className='py-2 lg:hidden border-b sticky top-[66px] bg-white'>
+            <div className='py-2 lg:hidden border-b sticky top-[61px] xs:top-[66px] bg-white'>
                 {handleResponsive()}
             </div>
         </>

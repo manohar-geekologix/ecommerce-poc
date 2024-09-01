@@ -3,7 +3,7 @@ import { users } from '@/utils/MockData';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { IoWarningOutline } from 'react-icons/io5';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 
 const LoginForm = () => {
@@ -11,6 +11,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [isValidUser, setIsValidUser] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -71,14 +72,20 @@ const LoginForm = () => {
     }
 
     const user = users.find(
-      (u) => (u.email === formData.email && formData.phone != '' &&  u.phone === formData.phone || u.email === formData.email && formData.phone == '' ) && u.password === formData.password
+      (u) => (u.email === formData.email && formData.phone != '' && u.phone === formData.phone || u.email === formData.email && formData.phone == '') && u.password === formData.password
     );
 
-    if (!user) return toast.error('No user found with that email or phone number.');
+    if (!user) {
+      setIsValidUser(true)
+      setLoading(false)
+      return;
+    } else {
+      setIsValidUser(false)
+    }
 
     const otp = Math.floor(100000 + Math.random() * 900000);
     localStorage.setItem('verificationOtp', otp);
-    await sendOtp(user.email, otp);
+    await sendOtp(user?.email, otp);
   };
 
   return (
@@ -176,6 +183,14 @@ const LoginForm = () => {
               {errors.password && <p className="text-[#CE5C1C] text-sm mt-2">{errors.password}</p>}
             </label>
           </div>
+          {isValidUser &&
+            <div className='bg-[#FFF4ED] p-2 rounded-md border border-[#CE5C1C] flex items-start gap-2 mt-2 transition-all'>
+              <div>
+                <IoWarningOutline className='text-[#CE5C1C] text-xl' />
+              </div>
+              <p className="text-[#CE5C1C] text-sm font-medium">Your Email or Password are incorrect. Please try again.</p>
+            </div>
+          }
           <button
             type="button"
             className="bg-[#213B85] text-white font-extrabold text-base lg:text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
@@ -198,7 +213,7 @@ const LoginForm = () => {
           <div id="recaptcha-container"></div>
         </form>
       </div>
-    </section>  
+    </section>
   );
 };
 
