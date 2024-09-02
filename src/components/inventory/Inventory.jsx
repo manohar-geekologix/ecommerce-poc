@@ -88,7 +88,7 @@ const Inventory = () => {
                         Entries
                     </div>
                     <div className='flex items-center border rounded-md py-1 max-md:w-full'>
-                        <IoSearchSharp className='mx-2 text-xl' />
+                        <IoSearchSharp className='mx-2 text-xl min-h-5 min-w-5' />
                         <input
                             type="text"
                             placeholder="Search"
@@ -101,37 +101,6 @@ const Inventory = () => {
                 {!loading && (
                     <ProductTable {...{ filteredProducts, handleDelete }} />
                 ) || <Loader />}
-            </div>
-            <div className="bg-white flex md:flex-row max-md:gap-2 flex-col items-center justify-between md:mb-6 border-t-2 p-4 px-8">
-                <div className='max-md:text-sm'>
-                    Showing 1-10 of 60 Entries
-                </div>
-                <div className="flex justify-center items-center space-x-2 max-md:text-sm">
-                    <button className="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
-                        <GrFormPrevious /> Prev
-                    </button>
-
-                    <button className="px-3 py-1 text-blue-500  bg-[#E7F0FC] border border-transparent rounded focus:outline-none">
-                        1
-                    </button>
-                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
-                        2
-                    </button>
-                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
-                        3
-                    </button>
-
-                    <span className="px-3 py-1">...</span>
-
-                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
-                        6
-                    </button>
-
-                    <button className="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
-                        Next <MdNavigateNext />
-                    </button>
-                </div>
-
             </div>
         </div>
     );
