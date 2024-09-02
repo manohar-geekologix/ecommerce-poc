@@ -4,7 +4,7 @@ export const users = [
     name: 'nikhil',
     email: 'nikhil@mailinator.com',
     password: '123456',
-    phone: '1231231234',
+    phone: '9680905583',
   },
   {
     name: 'manohar',

@@ -1,4 +1,5 @@
 'use client';
+import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,13 +7,15 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaLessThan } from 'react-icons/fa';
+import firebaseApp from '../../firebase';
 // 
 
   const SendCode = () => {
     const [otp, setOtp] = useState(new Array(6).fill("")); // Array to hold 6 digits
     const inputRefs = useRef([]); // Array of refs to handle input focus
     const router = useRouter();
-   
+    const auth = getAuth(firebaseApp);
+    auth.useDeviceLanguage()
     const handleChange = (element, index) => {
       if (isNaN(element.value)) return;
    
@@ -78,16 +81,16 @@ import { FaLessThan } from 'react-icons/fa';
         try {
             const credential = PhoneAuthProvider.credential(verificationId, otpString);
             await signInWithCredential(auth, credential);
-            router.push('/');
+            let token = generateUniqueString();
+            Cookies.set("accessToken", token, { expires: 7, path: "/" });
+            router.push("/product");
             toast.success("OTP verified successfully!");
             localStorage.removeItem('verificationId');
         } catch (error) {
-            toast.error("Envalid OTP ");
+          console.log("error",error)
+          toast.error("Invalid OTP");
         }
     }else{
- 
-   
-     
         const verification = localStorage.getItem("verificationOtp");
         if (otpString === verification) {
           let token = generateUniqueString();
