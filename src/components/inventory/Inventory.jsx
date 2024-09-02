@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { FiTablet } from "react-icons/fi";
 import { GiLipstick } from "react-icons/gi";
 import { IoCarSportOutline, IoSearchSharp } from 'react-icons/io5';
-import { RiSofaLine } from 'react-icons/ri';
+import { RiShoppingBasketLine, RiSofaLine } from 'react-icons/ri';
 import Loader from './Loader';
 import ProductTable from './ProductTable';
 
@@ -17,7 +17,7 @@ const categoryList = [
     { name: 'Beauty', icon: <GiLipstick /> },
     { name: 'Fragrances', icon: <TbPerfume /> },
     { name: 'Furniture', icon: <RiSofaLine /> },
-    { name: 'Groceries', icon: <FaShoppingBasket /> },
+    { name: 'Groceries', icon: <RiShoppingBasketLine /> },
     { name: 'vehicle', icon: <IoCarSportOutline /> },
     { name: 'tablets', icon: <FiTablet /> },
     { name: 'Laptops', icon: <FaLaptop /> },
@@ -63,8 +63,8 @@ const Inventory = () => {
     );
 
     return (
-        <div className="p-4 pt-2 lg:p-10">
-            <div className="flex space-x-4 mb-6 border-b-2 overflow-auto no-scrollbar">
+        <div className="pt-2 lg:p-10">
+            <div className="flex space-x-4 mb-6 max-md:ps-2 border-b-2 overflow-auto no-scrollbar">
                 {categoryList?.map((category) => (
                     <button
                         key={category.name}
@@ -78,8 +78,8 @@ const Inventory = () => {
                     </button>
                 ))}
             </div>
-            <div className="md:bg-white flex flex-col">
-                <div className="flex justify-between items-center lg:border-b lg:p-4 lg:px-8 text-[#777777]">
+            <div className="md:bg-white flex flex-col max-md:px-3">
+                <div className="flex justify-between items-center lg:border-b lg:p-4 md:p-4 lg:px-8 text-[#777777]">
                     <div className='max-md:hidden'>
                         show
                         <select
@@ -97,7 +97,7 @@ const Inventory = () => {
                         </select>
                         Entries
                     </div>
-                    <div className='flex items-center border rounded-md py-1 max-md:w-full'>
+                    <div className='flex items-center border rounded-md py-1 max-md:w-full bg-white'>
                         <IoSearchSharp className='mx-2 text-xl min-h-5 min-w-5' />
                         <input
                             type="text"
@@ -109,7 +109,7 @@ const Inventory = () => {
                     </div>
                 </div>
                 {!loading && (
-                    <ProductTable {...{ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage }} />
+                    <ProductTable {...{ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage, activeCategory }} />
                 ) || <Loader />}
             </div>
         </div>

@@ -10,7 +10,7 @@ export const users = [
     name: 'manohar',
     email: 'manohar.geekologix@gmail.com',
     password: '123456',
-    phone: '1234567567',
+    phone: '895',
   },
   {
     name: 'kirti',
@@ -33,12 +33,6 @@ export const users = [
   {
     name: 'shubhangi',
     email: 'shubhangi.geekologix@gmail.com',
-    password: '123456',
-    phone: '1234567567',
-  },
-  {
-    name: 'test',
-    email: 'manohar2bhadu@gmail.com',
     password: '123456',
     phone: '1234567567',
   }

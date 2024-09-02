@@ -5,7 +5,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext, MdOutlineModeEdit } from "react-icons/md";
 import { RiArrowDropRightLine, RiDeleteBin6Line } from "react-icons/ri";
 
-const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage }) => {
+const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage, activeCategory }) => {
 
   // Calculate the indices of the products to display
   const indexOfLastProduct = currentPage * itemsPerPage;
@@ -35,6 +35,9 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">S.No.</th>
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Image</th>
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Name</th>
+                  {activeCategory == 'All' && (
+                    <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Category</th>
+                  )}
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Brand</th>
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Availability</th>
                   <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Stock Left</th>
@@ -66,6 +69,11 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                           {item.title}
                         </Link>
                       </td>
+                      {activeCategory == 'All' && (
+                        <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-sm text-gray-800">
+                          {item.category || "-"}
+                        </td>
+                      )}
                       <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-sm text-gray-800">
                         {item.brand || "-"}
                       </td>

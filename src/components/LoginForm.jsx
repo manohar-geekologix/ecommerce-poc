@@ -13,27 +13,24 @@ import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth
 import firebaseApp from '../../firebase';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '',input:'', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', input: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [isValidUser, setIsValidUser] = useState(false);
   const router = useRouter();
-  const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
 
   const auth = getAuth(firebaseApp);
   auth.useDeviceLanguage()
 
   const recaptchaVerifierRef = useRef(null);
 
-
   useEffect(() => {
     // Initialize RecaptchaVerifier
     if (!recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current = new RecaptchaVerifier(auth,"recaptcha-container", {
+      recaptchaVerifierRef.current = new RecaptchaVerifier(auth, "recaptcha-container", {
         size: 'invisible',
-      }
-      );
+      });
     }
 
     return () => {
@@ -49,15 +46,13 @@ const LoginForm = () => {
     const phoneRegex = /^[0-9]{10}$/;
 
     if (emailRegex.test(formData.input)) {
-        return "email";
+      return "email";
     } else if (phoneRegex.test(formData.input)) {
-        return "phone";
+      return "phone";
     } else {
-        return null;
+      return null;
     }
-};
-
-
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -104,16 +99,14 @@ const LoginForm = () => {
     }
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     const inputType = validateInput();
-        // Validate input and password
-        if (!inputType) {
-          newErrors.email = 'Please enter a valid email or phone number.';
-      }
+    // Validate input and password
+    if (!inputType) {
+      newErrors.email = 'Please enter a valid email or phone number.';
+    }
 
     // if (!validateEmail(formData.email)) newErrors.email = 'Please enter correct email address.';
     // if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
@@ -142,20 +135,19 @@ const LoginForm = () => {
         setLoading(true);
         const appVerifier = recaptchaVerifierRef.current;
         try {
-    
-          const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.input}`, appVerifier);
           localStorage.setItem('verificationId', confirmationResult.verificationId);
+          const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.input}`, appVerifier);
           toast.success('OTP sent successfully!');
           router.push('/send-code');
-      } catch (error) {
+        } catch (error) {
           if (error.code === 'auth/too-many-requests') {
-              toast.error("Too many requests. Please try again later.");
+            toast.error("Too many requests. Please try again later.");
           } else {
-              console.error("Error sending OTP:", error);
+            console.error("Error sending OTP:", error);
           }
-      }finally {
-        setLoading(false);
-      }
+        } finally {
+          setLoading(false);
+        }
       }
 
       setIsValidUser(false)
@@ -189,11 +181,11 @@ const LoginForm = () => {
             <p className="text-[#213B85] font-normal text-xs lg:text-sm">Welcome Back!</p>
           </div>
 
-          <div className="group group-focus-within:border-[#CE5C1C]">
+          <div className="group group-focus-within:border-[#CE5C1C]" title='Please fill in your contact details'>
             <label htmlFor="email" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Email or Mobile Number<span className="text-[#CE5C1C]">*</span>
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
-                <FaRegUser className='mx-1.5' />
+                <FaRegUser className='mx-1.5 h-[17px] w-[16px] my-1' />
                 <input
                   type="email"
                   name="input"
@@ -209,33 +201,7 @@ const LoginForm = () => {
             </label>
           </div>
 
-          {/* <div className="group group-focus-within:border-[#CE5C1C]">
-            <label htmlFor="mobile-number" className="text-[#1A1A1A] font-medium text-xs lg:text-sm ">
-              Mobile Number
-              <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
-                <Image
-                  width={100}
-                  height={100}
-                  alt="mobile_android"
-                  src={'/images/phone_android.svg'}
-                  className="size-auto"
-                />
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  maxLength={10}
-                  onChange={handleChange}
-                  id="phone"
-                  placeholder="Mobile Number"
-                  className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full"
-                />
-              </div>
-              {errors.phone && <p className="text-[#CE5C1C] text-sm mt-2">{errors.phone}</p>}
-            </label>
-          </div> */}
-
-          <div className="group group-focus-within:border-[#CE5C1C]">
+          <div className="group group-focus-within:border-[#CE5C1C]" title='Password must be at least 6 characters long'>
             <label htmlFor="password" className="text-[#1A1A1A] font-medium text-xs lg:text-sm">
               Password<span className="text-[#CE5C1C]">*</span>
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
@@ -266,7 +232,7 @@ const LoginForm = () => {
             </div>
           }
           <button
-            type="button"
+            type="submit"
             className="bg-[#213B85] text-white font-extrabold text-base lg:text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
             onClick={handleSubmit}
           >
