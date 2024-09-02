@@ -136,72 +136,78 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
       </div>
 
       <div className="md:hidden">
-        {currentProducts?.map((item, index) => (
-          <div key={index} className="border my-2 rounded-lg py-4 bg-white">
-            <div className="flex justify-between items-center pb-3 px-3">
-              <div>
-                <span
-                  className={`rounded-2xl text-xs py-1 border ${item.availabilityStatus == "In Stock"
-                    ? "text-[#09AD95] bg-[#E6F7F4] px-3.5 border-[#A3E9D1]"
-                    : "text-[#DC3545] bg-[#FDE9EC] border-[#FFC6CE] px-2"
-                    }`}
-                >
-                  {item.availabilityStatus}
-                </span>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-x-2 text-sm font-semibold  border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 bg-[#E7F0FC] p-1.5 rounded-full border-[#C3DDFF]"
-                >
-                  <MdOutlineModeEdit />
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-x-2 text-sm font-semibold border border-transparent text-red-600 hover:text-red-800 focus:outline-none focus:text-red-800 ml-2 bg-[#FDE9EC] p-1.5 rounded-full border-[#FFC6CE]"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  <RiDeleteBin6Line />
-                </button>
-              </div>
-            </div>
-            <div className=" border-t px-3">
-              <div className="flex items-center py-3 text-sm font-semibold">
-                <div className="pe-3">
-                  <Image
-                    width={100}
-                    height={100}
-                    src={item.images[0]}
-                    alt={item.title}
-                    className="bg-gray-200 w-14 h-14 object-cover"
-                  />
+        {currentProducts.length ? (
+          currentProducts?.map((item, index) => (
+            <div key={index} className="border my-2 rounded-lg py-4 bg-white">
+              <div className="flex justify-between items-center pb-3 px-3">
+                <div>
+                  <span
+                    className={`rounded-2xl text-xs py-1 border ${item.availabilityStatus == "In Stock"
+                      ? "text-[#09AD95] bg-[#E6F7F4] px-3.5 border-[#A3E9D1]"
+                      : "text-[#DC3545] bg-[#FDE9EC] border-[#FFC6CE] px-2"
+                      }`}
+                  >
+                    {item.availabilityStatus}
+                  </span>
                 </div>
                 <div>
-                  <div>
-                    <Link href={`/product/${item.id}?label=inventory`} className="hover:text-[#213B85]">
-                      {item.title}
-                    </Link>
-                  </div>
-                  <div> $ {item.price}</div>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-x-2 text-sm font-semibold  border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 bg-[#E7F0FC] p-1.5 rounded-full border-[#C3DDFF]"
+                  >
+                    <MdOutlineModeEdit />
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-x-2 text-sm font-semibold border border-transparent text-red-600 hover:text-red-800 focus:outline-none focus:text-red-800 ml-2 bg-[#FDE9EC] p-1.5 rounded-full border-[#FFC6CE]"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
                 </div>
               </div>
-              <div className="flex justify-between">
-                <div className="text-center">
-                  <div className="text-xs text-[#999999]">Category</div>
-                  <div className="text-sm font-semibold">{item.category}</div>
+              <div className=" border-t px-3">
+                <div className="flex items-center py-3 text-sm font-semibold">
+                  <div className="pe-3">
+                    <Image
+                      width={100}
+                      height={100}
+                      src={item.images[0]}
+                      alt={item.title}
+                      className="bg-gray-200 w-14 h-14 object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div>
+                      <Link href={`/product/${item.id}?label=inventory`} className="hover:text-[#213B85]">
+                        {item.title}
+                      </Link>
+                    </div>
+                    <div> $ {item.price}</div>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-xs text-[#999999]">Brand</div>
-                  <div className="text-sm font-semibold">{item.brand || '-'}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs text-[#999999]">Weight</div>
-                  <div className="text-sm font-semibold">{item.weight}</div>
+                <div className="flex justify-between">
+                  <div className="text-center">
+                    <div className="text-xs text-[#999999]">Category</div>
+                    <div className="text-sm font-semibold">{item.category}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-[#999999]">Brand</div>
+                    <div className="text-sm font-semibold">{item.brand || '-'}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-[#999999]">Weight</div>
+                    <div className="text-sm font-semibold">{item.weight}</div>
+                  </div>
                 </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="bg-white">
+            <div colSpan="10" className="text-center py-4">No products found</div>
           </div>
-        ))}
+        )}
       </div>
 
       {/* Pagination Controls */}

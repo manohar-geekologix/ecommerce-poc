@@ -68,7 +68,7 @@ const Inventory = () => {
                 {categoryList?.map((category) => (
                     <button
                         key={category.name}
-                        onClick={() => setActiveCategory(category.name)}
+                        onClick={() => (setActiveCategory(category.name),setCurrentPage(1))}
                         className={`flex items-center gap-2 lg:pb-4 lg:px-4 py-2 text-base lg:text-lg text-[#213B85] ${activeCategory == category.name && `border-[#213B85] border-b-2 font-bold`} capitalize`}
                     >
                         <div className={`p-1 lg:p-2 rounded-full ${activeCategory == category.name && 'bg-[#213B85] text-white' || 'bg-[#EAF1FF]'}`}>
@@ -79,11 +79,11 @@ const Inventory = () => {
                 ))}
             </div>
             <div className="md:bg-white flex flex-col max-md:px-3">
-                <div className="flex justify-between items-center lg:border-b lg:p-4 md:p-4 lg:px-8 text-[#777777]">
+                <div className="flex justify-between items-center lg:border-b lg:p-4 md:p-4 lg:px-8 text-[#777777] overflow-hidden">
                     <div className='max-md:hidden'>
-                        show
+                        Show
                         <select
-                            className='bg-transparent border rounded-lg ps-1 mx-2 outline-none'
+                            className='bg-transparent border rounded-lg ps-1 mx-2 outline-none font-semibold'
                             value={itemsPerPage}
                             onChange={(e) => {
                                 setItemsPerPage(parseInt(e.target.value, 10));
