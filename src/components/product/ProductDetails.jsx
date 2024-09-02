@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaRegHeart } from "react-icons/fa6";
 import { IoMdStar } from "react-icons/io";
@@ -9,7 +10,9 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const ProductDetails = ({ id }) => {
     const [product, setProduct] = useState(null)
-
+    const searchParams = useSearchParams();
+    const label = searchParams.get('label');
+    console.log("🚀 ~ ProductDetails ~ label:", label)
     useEffect(() => {
         if (id) {
             fetch(`https://dummyjson.com/products/${id}`)
@@ -48,7 +51,7 @@ const ProductDetails = ({ id }) => {
     return (
         <>
             <div className="px-4 md:px-8 lg:px-16 lg:mt-4 max-lg:my-2 text-[#999999]">
-                <Link href={'/'}>Home</Link> / <span className='text-[#CE5C1C] font-semibold'>Product Details</span>
+                <Link href={label == 'inventory' && '/inventory' || '/'}>{label == 'inventory' && 'Inventory' || 'Home'}</Link> / <span className='text-[#CE5C1C] font-semibold'>Product Details</span>
             </div>
             <section className="flex flex-col md:flex-row justify-center max-lg:pb-2 md:py-4 px-4 md:px-8 lg:px-16 gap-8">
                 <div>
