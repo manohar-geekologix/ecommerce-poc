@@ -34,7 +34,7 @@ const Inventory = () => {
     useEffect(() => {
         const url = activeCategory !== 'All'
             ? `https://dummyjson.com/products/category/${activeCategory}`
-            : 'https://dummyjson.com/products';
+            : 'https://dummyjson.com/products?limit=50';
 
         fetch(url)
             .then(res => res.json())

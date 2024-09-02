@@ -10,7 +10,7 @@ const ProductList = () => {
     const [loading, setLoading] = useState(true) // Initialize loading state as true
 
     useEffect(() => {
-        fetch('https://dummyjson.com/products/category/beauty')
+        fetch('https://dummyjson.com/products/category/home-decoration')
             .then(res => res.json())
             .then(data => {
                 setBeautyProduct(data.products)
