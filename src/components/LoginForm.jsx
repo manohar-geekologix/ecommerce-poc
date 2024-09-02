@@ -7,9 +7,10 @@ import { IoWarningOutline } from 'react-icons/io5';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
-import  firebaseApp from "@/app/firebase";
+// import  firebaseApp from "@/app/firebase";
 
 import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
+import firebaseApp from '../../firebase';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
@@ -21,6 +22,7 @@ const LoginForm = () => {
   const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
 
   const auth = getAuth(firebaseApp);
+  auth.useDeviceLanguage()
 
   const recaptchaVerifierRef = useRef(null);
 
@@ -28,58 +30,19 @@ const LoginForm = () => {
   useEffect(() => {
     // Initialize RecaptchaVerifier
     if (!recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current = new RecaptchaVerifier('recaptcha-container', {
+      recaptchaVerifierRef.current = new RecaptchaVerifier(auth,"recaptcha-container", {
         size: 'invisible',
-        callback: () => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          handleSubmit(e);
-        },
-      },
-        auth
+      }
       );
     }
 
     return () => {
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear();
-        recaptchaVerifierRef.current = null;
       }
     };
-  }, []);
+  }, [auth]);
 
-  // useEffect(() => {
-  //   // Load reCAPTCHA script
-  //   const loadRecaptchaScript = () => {
-  //     const script = document.createElement('script');
-  //     script.src = `https://www.google.com/recaptcha/api.js?render=${'6LcwsDIqAAAAAFB_gyR-ejFwT4dQKHcgfWCLYcrb'}`;
-  //     script.async = true;
-  //     document.body.appendChild(script);
-  //   };
-
-  //   loadRecaptchaScript();
-
-  //   // Cleanup function
-  //   return () => {
-  //     if (recaptchaVerifierRef.current) {
-  //       recaptchaVerifierRef.current.clear();
-  //       recaptchaVerifierRef.current = null;
-  //     }
-  //   };
-  // }, []);
-
-  // const initializeRecaptcha = () => {
-  //   if (!recaptchaVerifierRef.current) {
-  //     recaptchaVerifierRef.current =  new RecaptchaVerifier(
-  //                     "recaptcha-container",
-  //                     {
-  //                       size: "invisible",
-  //                       callback: (response) => {},
-  //                       "expired-callback": () => {},
-  //                     },
-  //                     auth
-  //                   );
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -125,19 +88,6 @@ const LoginForm = () => {
     }
   };
 
-  //  function onCaptchVerify() {
-  //           if (!window.recaptchaVerifier) {
-  //             window.recaptchaVerifier = new RecaptchaVerifier(
-  //               "recaptcha-container",
-  //               {
-  //                 size: "normal",
-  //                 callback: (response) => {},
-  //                 "expired-callback": () => {},
-  //               },
-  //               auth
-  //             );
-  //           }
-  //         }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -169,12 +119,11 @@ const LoginForm = () => {
     const appVerifier = recaptchaVerifierRef.current;
     try {
 
-      const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.phone.replace(/\D/g,'')}`, appVerifier);
+      const confirmationResult = await signInWithPhoneNumber(auth, `+918949269005`, appVerifier);
       // setVerificationId(confirmationResult.verificationId);
       localStorage.setItem('verificationId', confirmationResult.verificationId);
-      setMessage('OTP sent successfully!');
-      // const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.phone.replace(/\D/g,'')}`,window.recaptchaVerifier);
-      // router.push('/send-code');
+      toast.success('OTP sent successfully!');
+      router.push('/send-code');
       // toast.success("OTP sent to your phone");
   } catch (error) {
       if (error.code === 'auth/too-many-requests') {
