@@ -1,14 +1,11 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext, MdOutlineModeEdit } from "react-icons/md";
 import { RiArrowDropRightLine, RiDeleteBin6Line } from "react-icons/ri";
 
-const ProductTable = ({ filteredProducts, handleDelete }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of items per page
+const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage }) => {
 
   // Calculate the indices of the products to display
   const indexOfLastProduct = currentPage * itemsPerPage;
