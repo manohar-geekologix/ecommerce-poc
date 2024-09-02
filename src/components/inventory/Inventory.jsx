@@ -1,9 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { FaLaptop, FaShoppingBasket } from 'react-icons/fa';
-import { GiHomeGarage } from 'react-icons/gi';
-import { GrFormPrevious } from "react-icons/gr";
-import { MdNavigateNext, MdOutlineStorefront } from "react-icons/md";
+import { MdOutlineStorefront } from "react-icons/md";
 import { TbPerfume } from "react-icons/tb";
 
 import toast from 'react-hot-toast';
@@ -30,6 +28,8 @@ const Inventory = () => {
     const [activeCategory, setActiveCategory] = useState('All');
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [itemsPerPage, setItemsPerPage] = useState(10); // Number of items per page
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         const url = activeCategory !== 'All'
@@ -82,8 +82,18 @@ const Inventory = () => {
                 <div className="flex justify-between items-center lg:border-b lg:p-4 lg:px-8 text-[#777777]">
                     <div className='max-md:hidden'>
                         show
-                        <select className='bg-transparent border rounded-lg ps-1 pe-3 mx-3 outline-none' name="" id="">
+                        <select
+                            className='bg-transparent border rounded-lg ps-1 mx-2 outline-none'
+                            value={itemsPerPage}
+                            onChange={(e) => {
+                                setItemsPerPage(parseInt(e.target.value, 10));
+                                setCurrentPage(1);
+                            }}
+                        >
                             <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
                         </select>
                         Entries
                     </div>
@@ -99,7 +109,7 @@ const Inventory = () => {
                     </div>
                 </div>
                 {!loading && (
-                    <ProductTable {...{ filteredProducts, handleDelete }} />
+                    <ProductTable {...{ filteredProducts, handleDelete, currentPage, setCurrentPage, itemsPerPage }} />
                 ) || <Loader />}
             </div>
         </div>
