@@ -1,23 +1,27 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { FaBed, FaCouch, FaLaptop, FaShoppingBasket } from 'react-icons/fa';
-import { GiHomeGarage, GiKitchenKnives, GiPerfumeBottle } from 'react-icons/gi';
-import { MdNavigateNext, MdOutlineStorefront } from "react-icons/md";
+import { FaLaptop, FaShoppingBasket } from 'react-icons/fa';
+import { GiHomeGarage } from 'react-icons/gi';
 import { GrFormPrevious } from "react-icons/gr";
+import { MdNavigateNext, MdOutlineStorefront } from "react-icons/md";
+import { TbPerfume } from "react-icons/tb";
 
-import { IoSearchSharp } from 'react-icons/io5';
-import ProductTable from './ProductTable';
-import Loader from './Loader';
 import toast from 'react-hot-toast';
+import { FiTablet } from "react-icons/fi";
+import { GiLipstick } from "react-icons/gi";
+import { IoCarSportOutline, IoSearchSharp } from 'react-icons/io5';
+import { RiSofaLine } from 'react-icons/ri';
+import Loader from './Loader';
+import ProductTable from './ProductTable';
 
 const categoryList = [
     { name: 'All', icon: <MdOutlineStorefront /> },
-    { name: 'Beauty', icon: <FaBed /> },
-    { name: 'Fragrances', icon: <GiPerfumeBottle /> },
-    { name: 'Furniture', icon: <FaCouch /> },
+    { name: 'Beauty', icon: <GiLipstick /> },
+    { name: 'Fragrances', icon: <TbPerfume /> },
+    { name: 'Furniture', icon: <RiSofaLine /> },
     { name: 'Groceries', icon: <FaShoppingBasket /> },
-    { name: 'vehicle', icon: <GiHomeGarage /> },
-    { name: 'tablets', icon: <GiKitchenKnives /> },
+    { name: 'vehicle', icon: <IoCarSportOutline /> },
+    { name: 'tablets', icon: <FiTablet /> },
     { name: 'Laptops', icon: <FaLaptop /> },
 ]
 
@@ -74,7 +78,7 @@ const Inventory = () => {
                     </button>
                 ))}
             </div>
-            <div className="bg-white flex flex-col">
+            <div className="md:bg-white flex flex-col">
                 <div className="flex justify-between items-center lg:border-b lg:p-4 lg:px-8 text-[#777777]">
                     <div className='max-md:hidden'>
                         show
@@ -102,28 +106,28 @@ const Inventory = () => {
                 <div className='max-md:text-sm'>
                     Showing 1-10 of 60 Entries
                 </div>
-                <div class="flex justify-center items-center space-x-2 max-md:text-sm">
-                    <button class="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
+                <div className="flex justify-center items-center space-x-2 max-md:text-sm">
+                    <button className="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         <GrFormPrevious /> Prev
                     </button>
 
-                    <button class="px-3 py-1 text-blue-500  bg-[#E7F0FC] border border-transparent rounded focus:outline-none">
+                    <button className="px-3 py-1 text-blue-500  bg-[#E7F0FC] border border-transparent rounded focus:outline-none">
                         1
                     </button>
-                    <button class="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
+                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         2
                     </button>
-                    <button class="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
+                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         3
                     </button>
 
-                    <span class="px-3 py-1">...</span>
+                    <span className="px-3 py-1">...</span>
 
-                    <button class="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
+                    <button className="px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         6
                     </button>
 
-                    <button class="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
+                    <button className="flex items-center gap-1 px-3 py-1 border border-transparent rounded hover:text-blue-700 focus:outline-none">
                         Next <MdNavigateNext />
                     </button>
                 </div>
