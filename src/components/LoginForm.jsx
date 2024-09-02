@@ -2,25 +2,69 @@
 import { users } from '@/utils/MockData';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { FaRegUser } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
+import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
+// import  firebaseApp from "@/app/firebase";
+
+import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
+import firebaseApp from '../../firebase';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '',input:'', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [isValidUser, setIsValidUser] = useState(false);
   const router = useRouter();
+  const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
+
+  const auth = getAuth(firebaseApp);
+  auth.useDeviceLanguage()
+
+  const recaptchaVerifierRef = useRef(null);
+
+
+  useEffect(() => {
+    // Initialize RecaptchaVerifier
+    if (!recaptchaVerifierRef.current) {
+      recaptchaVerifierRef.current = new RecaptchaVerifier(auth,"recaptcha-container", {
+        size: 'invisible',
+      }
+      );
+    }
+
+    return () => {
+      if (recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current.clear();
+      }
+    };
+  }, [auth]);
+
+  const validateInput = () => {
+    // Basic regex patterns
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (emailRegex.test(formData.input)) {
+        return "email";
+    } else if (phoneRegex.test(formData.input)) {
+        return "phone";
+    } else {
+        return null;
+    }
+};
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Clear specific error if the input is valid
-    if (name === 'email' && errors.email && validateEmail(value)) {
+    if (name === 'input' && errors.email && validateInput(value)) {
       setErrors((prev) => ({ ...prev, email: '' }));
     } else if (name === 'phone' && errors.phone && validatePhone(value)) {
       setErrors((prev) => ({ ...prev, phone: '' }));
@@ -50,6 +94,7 @@ const LoginForm = () => {
 
       if (!res.ok) throw new Error('Failed to send OTP');
       const result = await res.json();
+      toast.success('OTP sent successfully!');
       router.push('/send-code');
       return result;
     } catch (error) {
@@ -59,12 +104,19 @@ const LoginForm = () => {
     }
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
+    const inputType = validateInput();
+        // Validate input and password
+        if (!inputType) {
+          newErrors.email = 'Please enter a valid email or phone number.';
+      }
 
-    if (!validateEmail(formData.email)) newErrors.email = 'Please enter correct email address.';
-    if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
+    // if (!validateEmail(formData.email)) newErrors.email = 'Please enter correct email address.';
+    // if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
     if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters.';
 
     if (Object.keys(newErrors).length) {
@@ -73,7 +125,7 @@ const LoginForm = () => {
     }
 
     const user = users.find(
-      (u) => (u.email === formData.email && formData.phone != '' && u.phone === formData.phone || u.email === formData.email && formData.phone == '') && u.password === formData.password
+      (u) => (u.email === formData.input || u.phone === formData.input) && u.password === formData.password
     );
 
     if (!user) {
@@ -81,12 +133,33 @@ const LoginForm = () => {
       setLoading(false)
       return;
     } else {
+      const otp = Math.floor(100000 + Math.random() * 900000);
+      if (user.email === formData.input) {
+        localStorage.setItem('verificationOtp', otp);
+        await sendOtp(user?.email, otp);
+      }
+      if (user.phone === formData.input) {
+        setLoading(true);
+        const appVerifier = recaptchaVerifierRef.current;
+        try {
+    
+          const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.input}`, appVerifier);
+          localStorage.setItem('verificationId', confirmationResult.verificationId);
+          toast.success('OTP sent successfully!');
+          router.push('/send-code');
+      } catch (error) {
+          if (error.code === 'auth/too-many-requests') {
+              toast.error("Too many requests. Please try again later.");
+          } else {
+              console.error("Error sending OTP:", error);
+          }
+      }finally {
+        setLoading(false);
+      }
+      }
+
       setIsValidUser(false)
     }
-
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    localStorage.setItem('verificationOtp', otp);
-    await sendOtp(user?.email, otp);
   };
 
   return (
@@ -123,7 +196,7 @@ const LoginForm = () => {
                 <FaRegUser className='mx-1.5' />
                 <input
                   type="email"
-                  name="email"
+                  name="input"
                   id="email"
                   placeholder="Email address or Mobile Number"
                   className="text-[#777777] text-xs lg:text-sm border-none outline-none w-full bg-transparent group-focus:border-[#CE5C1C]"

@@ -8,16 +8,21 @@ import { LuBellDot } from "react-icons/lu";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 import React from 'react'
+import { getAuth, signOut } from 'firebase/auth'
+import firebaseApp from '../../firebase'
 
 const NavMenu = () => {
     const pathname = usePathname()
     const router = useRouter()
+    const auth = getAuth(firebaseApp);
+    auth.useDeviceLanguage()
 
     const handleLogout = () => {
         const confirmed = window.confirm('Are you sure you want to log out?');
         if (confirmed) {
             Cookies.remove('accessToken');
             router.push('/login');
+            signOut(auth)
         }
     }
 
