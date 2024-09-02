@@ -13,7 +13,7 @@ import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth
 import firebaseApp from '../../firebase';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '',input:'', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
