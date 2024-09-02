@@ -48,7 +48,7 @@ const NavMenu = () => {
             <header className="text-[#213B85] text-primary-foreground py-3 lg:py-4 lg:px-5 border-b sticky top-0 bg-white">
                 <nav className="flex items-center justify-between px-5 lg:px-10">
                     <Link href="/product" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
-                        <Image src={'/images/header-logo.svg'} width={100} height={100} className='size-full' />
+                        <Image src={'/images/header-logo.svg'} alt='Logo' width={100} height={100} className='size-full' priority />
                     </Link>
                     <div className="hidden lg:block">{handleResponsive()}</div>
                     <div className="flex items-center gap-5 lg:text-xl">
