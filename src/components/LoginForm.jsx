@@ -133,6 +133,7 @@ const LoginForm = () => {
       const otp = Math.floor(100000 + Math.random() * 900000);
       if (user.email === formData.input) {
         localStorage.setItem('verificationOtp', otp);
+        localStorage.removeItem('verificationId');
         await sendOtp(user?.email, otp);
       }
       if (user.phone === formData.input) {
