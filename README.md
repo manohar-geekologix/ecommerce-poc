@@ -1,14 +1,8 @@
-# Next.js Project
+# E-commerce POC
 
 ## Overview
 This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing modern web development practices and integrations. It leverages the power of React 18 and the latest features of Next.js, including the app directory structure for enhanced routing and server-side rendering capabilities.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Running the Project](#running-the-project)
-- [Dependencies](#dependencies)
-- [Screenshots](#screenshots)
 
 ## Getting Started
 
@@ -31,11 +25,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
    npm install
    ```
 
-3. Set up environment variables:
-   - Create a `.env.local` file in the root directory.
-   - Add necessary environment variables (e.g., Firebase config, API keys).
-
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm run dev
    ```
@@ -66,7 +56,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/9940eeee-08b2-4f02-96f1-502763f967f4)
+![image](https://github.com/user-attachments/assets/2b3c16ce-fcc5-44b1-84f4-83d906ff4a61)
 *Login Page*
 
 ![image](https://github.com/user-attachments/assets/0b7eff09-1371-4e8a-9571-34da420af142)
