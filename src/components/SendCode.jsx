@@ -83,7 +83,7 @@ import firebaseApp from '../../firebase';
             await signInWithCredential(auth, credential);
             let token = generateUniqueString();
             Cookies.set("accessToken", token, { expires: 7, path: "/" });
-            router.push("/product");
+            router.push("/inventory");
             toast.success("OTP verified successfully!");
             localStorage.removeItem('verificationId');
         } catch (error) {
@@ -96,7 +96,7 @@ import firebaseApp from '../../firebase';
           let token = generateUniqueString();
           Cookies.set("accessToken", token, { expires: 7, path: "/" });
           localStorage.removeItem("verificationOtp");
-          router.push("/product");
+          router.push("/inventory");
           toast.success("OTP verified successfully!");
         } else {
           toast.error("Invalid OTP");
@@ -109,7 +109,7 @@ import firebaseApp from '../../firebase';
       <div className="sm:w-1/2 text-start w-full">
         <div className="flex flex-col lg:gap-5 ">
           <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">E-Commerce.</h3>
+          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Warehouse Management.</h3>
         </div>
         <div className="lg:block hidden w-fit min-h-[451px] pt-5 3xl:pt-36">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />

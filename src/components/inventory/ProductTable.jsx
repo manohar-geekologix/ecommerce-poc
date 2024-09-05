@@ -40,11 +40,10 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                   )}
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Brand</th>
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Availability</th>
-                  <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Stock Left</th>
+                  <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Quantity</th>
                   <th className="px-3 xxl:px-6 py-5 text-start text-sm font-bold text-[#1A1A1A]">Price</th>
                   <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Weight</th>
                   <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Action</th>
-                  <th className="px-3 xxl:px-6 py-5 text-center text-sm font-bold text-[#1A1A1A]">Detail</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -65,12 +64,12 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                         />
                       </td>
                       <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-sm font-medium text-gray-800">
-                        <Link href={`/product/${item.id}?label=inventory`} className="hover:text-[#213B85]">
+                        <Link href={`/product/${item.id}?label=inventory`} className="text-[#213B85] underline">
                           {item.title}
                         </Link>
                       </td>
                       {activeCategory == 'All' && (
-                        <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-sm text-gray-800">
+                        <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-sm text-gray-800 capitalize">
                           {item.category || "-"}
                         </td>
                       )}
@@ -110,17 +109,6 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                         >
                           <RiDeleteBin6Line />
                         </button>
-                      </td>
-                      <td className="px-3 xxl:px-6 py-5 whitespace-nowrap text-center text-sm font-medium">
-                        <Link href={`/product/${item.id}?label=inventory`}>
-                          <button
-                            type="button"
-                            className="inline-flex items-center gap-s-2 text-sm rounded-lg border border-transparent text-[#213B85] hover:text-blue-800 focus:outline-none focus:text-blue-800 underline"
-                          >
-                            View Details
-                            <RiArrowDropRightLine className="text-xl" />
-                          </button>
-                        </Link>
                       </td>
                     </tr>
                   ))
@@ -179,7 +167,7 @@ const ProductTable = ({ filteredProducts, handleDelete, currentPage, setCurrentP
                   </div>
                   <div>
                     <div>
-                      <Link href={`/product/${item.id}?label=inventory`} className="hover:text-[#213B85]">
+                      <Link href={`/product/${item.id}?label=inventory`} className="text-[#213B85] underline">
                         {item.title}
                       </Link>
                     </div>

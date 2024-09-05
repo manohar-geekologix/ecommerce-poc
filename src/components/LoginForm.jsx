@@ -43,11 +43,12 @@ const LoginForm = () => {
   const validateInput = () => {
     // Basic regex patterns
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10}$/;
-
+    const indianPhoneRegex = /^\+91[6-9]\d{9}$/;  // Ensuring that the first digit after +91 is between 6-9
+    const usPhoneRegex = /^\+1[2-9]\d{9}$/;      // Ensuring valid US number (starts between 2-9)
+  
     if (emailRegex.test(formData.input)) {
       return "email";
-    } else if (phoneRegex.test(formData.input)) {
+    } else if (indianPhoneRegex.test(formData.input) || usPhoneRegex.test(formData.input)) {
       return "phone";
     } else {
       return null;
@@ -107,6 +108,9 @@ const LoginForm = () => {
     if (!inputType) {
       newErrors.email = 'Please enter a valid email or phone number.';
     }
+    if(formData.input.length == 10){
+      newErrors.email = 'Please include the country code (+91 or +1).';
+    }
 
     // if (!validateEmail(formData.email)) newErrors.email = 'Please enter correct email address.';
     // if (formData.phone && !validatePhone(formData.phone)) newErrors.phone = 'Enter a valid 10-digit mobile number.';
@@ -135,7 +139,7 @@ const LoginForm = () => {
         setLoading(true);
         const appVerifier = recaptchaVerifierRef.current;
         try {
-          const confirmationResult = await signInWithPhoneNumber(auth, `+91${formData.input}`, appVerifier);
+          const confirmationResult = await signInWithPhoneNumber(auth, formData.input, appVerifier);
           localStorage.setItem('verificationId', confirmationResult.verificationId);
           toast.success('OTP sent successfully!');
           router.push('/send-code');
@@ -159,7 +163,7 @@ const LoginForm = () => {
       <div className="sm:w-1/2 text-start w-full">
         <div className="flex flex-col lg:gap-5 ">
           <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">E-Commerce.</h3>
+          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Warehouse Management.</h3>
         </div>
         <div className="lg:block hidden w-fit min-h-[451px] pt-5 3xl:pt-36">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
