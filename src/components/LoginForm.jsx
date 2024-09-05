@@ -139,7 +139,7 @@ const LoginForm = () => {
         setLoading(true);
         const appVerifier = recaptchaVerifierRef.current;
         try {
-          const confirmationResult = await signInWithPhoneNumber(auth, `+918955609817`, appVerifier);
+          const confirmationResult = await signInWithPhoneNumber(auth, '+918955609817', appVerifier);
           localStorage.setItem('verificationId', confirmationResult.verificationId);
           toast.success('OTP sent successfully!');
           router.push('/send-code');
