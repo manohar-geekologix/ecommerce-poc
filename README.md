@@ -66,8 +66,18 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 
 ## Screenshots
 
-![Login Page](https://github.com/user-attachments/assets/6964b8e0-5fd9-4b2e-900d-849565ddd40f)
+![image](https://github.com/user-attachments/assets/9940eeee-08b2-4f02-96f1-502763f967f4)
 *Login Page*
+
+![image](https://github.com/user-attachments/assets/0b7eff09-1371-4e8a-9571-34da420af142)
+*OTP Page*
 
 ![Dashboard](https://github.com/user-attachments/assets/286a29be-6d58-4172-9dfd-89931430f8f7)
 *Dashboard*
+
+![image](https://github.com/user-attachments/assets/05aeb9b6-52de-42a8-ae9e-43d80b822232)
+*Inventory*
+
+![image](https://github.com/user-attachments/assets/9831913b-d542-4611-a3e0-abdaa3f7e8cc)
+*Product Detials*
+
