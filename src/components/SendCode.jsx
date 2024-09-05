@@ -105,17 +105,17 @@ import firebaseApp from '../../firebase';
     };
 
   return (
-    <section className="bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-[100vh] flex justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row overflow-hidden">
-      <div className="sm:w-1/2 text-start w-full">
+    <section className="bg-small-login-bg lg:bg-login-bg bg-no-repeat bg-center bg-cover h-[100vh] flex justify-between lg:justify-center items-center gap-7 lg:gap-0 xl:px-10 px-2 flex-col lg:flex-row overflow-hidden">
+      <div className="sm:w-1/2 text-start w-full max-lg:p-6 max-lg:mt-12 max-lg:me-10">
         <div className="flex flex-col lg:gap-5 ">
-          <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-5xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-[32px] lg:text-6xl">Warehouse Management.</h3>
+          <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-4xl">Welcome to</h1>
+          <h3 className="text-[#213B85] font-bold text-[28px] lg:text-5xl">Warehouse Management.</h3>
         </div>
         <div className="lg:block hidden w-fit min-h-[451px] pt-5 3xl:pt-36">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
         </div>
       </div>
-      <div className="lg:w-1/2 w-full relative">
+      <div className="lg:w-1/2 w-full relative max-lg:h-full">
         <div className="bg-white px-5 py-3 lg:px-5 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 xs:w-[360px] sm:w-[420px] md:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24">
           <div className="min-h-[80px]">
             <Image
