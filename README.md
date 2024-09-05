@@ -1,4 +1,4 @@
-# E-commerce POC
+# Warehouse Management
 
 ## Overview
 This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing modern web development practices and integrations. It leverages the power of React 18 and the latest features of Next.js, including the app directory structure for enhanced routing and server-side rendering capabilities.
