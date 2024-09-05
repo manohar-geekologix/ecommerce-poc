@@ -16,7 +16,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/manohar-geekologix/react-poc.git
+   git clone https://github.com/manohar-geekologix/ecommerce-poc.git
    cd react-poc
    ```
 
