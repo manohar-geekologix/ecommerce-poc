@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 // import 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvAYFh4EdEnJ3qO-3cdzPx5OPu87nhiw0",
-  authDomain: "reacto-poc.firebaseapp.com",
-  projectId: "reacto-poc",
-  storageBucket: "reacto-poc.appspot.com",
-  messagingSenderId: "160041334833",
-  appId: "1:160041334833:web:592ee7b91d5596d2bd7d10",
+  apiKey: "AIzaSyDWGKp2lvkq7ZL-3Y1vpG8yJl930QWkKm4",
+  authDomain: "react-poc-auth-app-899e1.firebaseapp.com",
+  projectId: "react-poc-auth-app-899e1",
+  storageBucket: "react-poc-auth-app-899e1.appspot.com",
+  messagingSenderId: "148659226690",
+  appId: "1:148659226690:web:08b6e76e4896a5fe9085db",
   measurementId: "G-F4FPDC5C8T"
 };
 

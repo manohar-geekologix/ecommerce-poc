@@ -140,7 +140,7 @@ const LoginForm = () => {
         setLoading(true);
         const appVerifier = recaptchaVerifierRef.current;
         try {
-          const confirmationResult = await signInWithPhoneNumber(auth, '+918955609817', appVerifier);
+          const confirmationResult = await signInWithPhoneNumber(auth, `${formData.input}`, appVerifier);
           localStorage.setItem('verificationId', confirmationResult.verificationId);
           toast.success('OTP sent successfully!');
           router.push('/send-code');
@@ -171,7 +171,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div className="lg:w-1/2 w-full relative max-lg:h-full">
-        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24" onSubmit={handleSubmit}>
+        <form className="bg-white px-5 py-3 lg:px-10 lg:py-5 rounded-2xl shadow-login-shadow flex flex-col gap-2 lg:gap-4 w-full sm:w-1/2 lg:w-[450px] mx-auto xl:absolute top-[-200px] lg:left-3 xl:left-2 2xl:left-10 3xl:left-24" onSubmit={handleSubmit} >
           <div className='min-h-[80px]'>
             <Image
               width={100}
@@ -192,7 +192,7 @@ const LoginForm = () => {
               <div className="flex items-center gap-2 border rounded-lg px-3 py-2 lg:px-2 lg:py-3 group-focus-within:border-[#CE5C1C]">
                 <FaRegUser className='mx-1.5 h-[17px] w-[16px] my-1' />
                 <input
-                  type="email"
+                  type="text"
                   name="input"
                   id="email"
                   placeholder="Email address or Mobile Number"
@@ -239,7 +239,6 @@ const LoginForm = () => {
           <button
             type="submit"
             className="bg-[#213B85] text-white font-extrabold text-base lg:text-xl w-full p-2 lg:px-3 lg:py-3 mt-3 rounded-xl"
-            onClick={handleSubmit}
           >
             {loading ? (
               <svg
