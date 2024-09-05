@@ -109,7 +109,7 @@ import firebaseApp from '../../firebase';
       <div className="sm:w-1/2 text-start w-full max-lg:p-6 max-lg:mt-12 max-lg:me-10">
         <div className="flex flex-col lg:gap-5 ">
           <h1 className=" text-[#CE5C1C] font-medium text-2xl lg:text-4xl">Welcome to</h1>
-          <h3 className="text-[#213B85] font-bold text-[28px] lg:text-5xl">Warehouse Management.</h3>
+          <h3 className="text-[#213B85] font-bold text-[28px] lg:text-5xl">Warehouse Management</h3>
         </div>
         <div className="lg:block hidden w-fit min-h-[451px] pt-5 3xl:pt-36">
           <Image width={100} height={100} alt="man's svg" src={'/images/mans.svg'} className="size-auto" />
