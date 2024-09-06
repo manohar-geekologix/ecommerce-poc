@@ -32,7 +32,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-## Dependencies
+## Dependencies (Open Source)
 
 - **[firebase](https://firebase.google.com/)** (^10.13.1): A platform developed by Google for creating mobile and web applications.
 - **[js-cookie](https://github.com/js-cookie/js-cookie)** (^3.0.5): A simple, lightweight JavaScript API for handling cookies.
