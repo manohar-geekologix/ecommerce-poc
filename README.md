@@ -32,7 +32,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-## Dependencies (Open Source)
+## All Dependencies are Open Source
 
 - **[firebase](https://firebase.google.com/)** (^10.13.1): A platform developed by Google for creating mobile and web applications.
 - **[js-cookie](https://github.com/js-cookie/js-cookie)** (^3.0.5): A simple, lightweight JavaScript API for handling cookies.
@@ -53,6 +53,21 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 - **Responsive Design**: Mobile-first approach ensuring compatibility across devices.
 - **Toast Notifications**: User-friendly notifications using react-hot-toast.
 - **Icon Library**: Comprehensive icon set provided by react-icons.
+
+## How add your Account for Login.
+
+In the repository, locate the file MockData.js under src/utils/MockData.js. Add the following details:
+
+Username
+Valid email address
+Password
+Mobile number (including country code)
+Make sure the information is accurate before saving the changes
+
+![image](https://github.com/user-attachments/assets/58100dff-fee9-4e37-9972-79e988430086)
+MockData.js
+
+
 
 ## Screenshots
 
