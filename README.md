@@ -77,9 +77,6 @@ MockData.js
 ![image](https://github.com/user-attachments/assets/0b7eff09-1371-4e8a-9571-34da420af142)
 *OTP Page*
 
-![Dashboard](https://github.com/user-attachments/assets/286a29be-6d58-4172-9dfd-89931430f8f7)
-*Dashboard*
-
 ![image](https://github.com/user-attachments/assets/05aeb9b6-52de-42a8-ae9e-43d80b822232)
 *Inventory*
 
