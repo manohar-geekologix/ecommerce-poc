@@ -9,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "react-poc-auth-app-899e1.appspot.com",
   messagingSenderId: "148659226690",
   appId: "1:148659226690:web:08b6e76e4896a5fe9085db",
-  measurementId: "G-F4FPDC5C8T"
+  // measurementId: "G-F4FPDC5C8T"
 };
 
 // Initialize Firebase
