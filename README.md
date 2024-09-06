@@ -54,7 +54,7 @@ This project is a Proof of Concept (POC) built with Next.js 14.2.6, showcasing m
 - **Toast Notifications**: User-friendly notifications using react-hot-toast.
 - **Icon Library**: Comprehensive icon set provided by react-icons.
 
-## How add your Account for Login.
+## How do you add your account for login?
 
 In the repository, locate the file MockData.js under src/utils/MockData.js. Add the following details:
 
